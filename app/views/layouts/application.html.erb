@@ -5,13 +5,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container">
+      <%= render template: 'pages/_nav' %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+    <!--JQuery munified-->
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        
   </body>
 </html>
