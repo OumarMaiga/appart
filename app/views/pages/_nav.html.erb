@@ -1,6 +1,6 @@
 <div class="row">
         <div class="col">
-            <a class="navbar-brand">APPART</a>
+            <a class="navbar-brand" href="#">APPART</a>
         </div>
         <div class="col">
             <ul class="nav">
@@ -16,9 +16,20 @@
             </ul>
         </div>
         <div class="col">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Recherche d'appart..." aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-            </form>
+            <div class="row">
+                <div class="col">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Recherche d'appart..." aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <% if user_signed_in? %>
+                        <%= link_to  "Deconnexion", destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' }, class: 'btn btn-primary' %>
+                    <% else %>
+                        <%= link_to  "Inscription", new_user_registration_path, class: 'btn btn-outline-primary"' %> <%= link_to  "Connexion", new_user_session_path, class: 'btn btn-outline-primary"' %>
+                    <% end %>
+                </div>
+            </div>
         </div>
 </div>

@@ -1,0 +1,18 @@
+<header>
+</header>
+<div class="row">
+        <center>
+    <div class="search">
+            <%= form_tag("/search", method: "get", class: 'form-inline') do %>
+                <div class="input-field row">
+                        <%= text_field(:q, class: 'form-control') %>
+                        <%= date_field :debut, class: 'form-control' %>
+                        -
+                        <%= date_field :fin, class: 'form-control' %>
+                        <%= number_field :nombre, class: 'form-control' %>
+                    <%= submit_tag('Rechercher', :class => 'waves-effect waves-light btn green form-control') %>
+                </div>
+            <% end %>
+    </div>
+        </center>
+</div>
