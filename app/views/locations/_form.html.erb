@@ -1,0 +1,76 @@
+<%= form_with(model: location, local: true) do |form| %>
+  <% if location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+        <% location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :titre %>
+    <%= form.text_field :titre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :adresse %>
+    <%= form.text_area :adresse %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :etat %>
+    <%= form.check_box :etat %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prix %>
+    <%= form.number_field :prix %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.select :type_id, Type.pluck(:libelle, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre_adulte %>
+    <%= form.number_field :nombre_adulte %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre_enfant %>
+    <%= form.number_field :nombre_enfant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre_salon %>
+    <%= form.number_field :nombre_salon %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre_chamber %>
+    <%= form.number_field :nombre_chamber %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre_toillete %>
+    <%= form.number_field :nombre_toillete %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

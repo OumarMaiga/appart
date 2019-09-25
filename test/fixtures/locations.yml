@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titre: MyString
+  adresse: MyText
+  description: MyText
+  etat: false
+  prix: 1
+  type: 
+  nombre_adulte: 1
+  nombre_enfant: 1
+  nombre_salon: 1
+  nombre_chamber: 1
+  nombre_toillete: 1
+  user: one
+
+two:
+  titre: MyString
+  adresse: MyText
+  description: MyText
+  etat: false
+  prix: 1
+  type: 
+  nombre_adulte: 1
+  nombre_enfant: 1
+  nombre_salon: 1
+  nombre_chamber: 1
+  nombre_toillete: 1
+  user: two

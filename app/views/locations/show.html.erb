@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titre:</strong>
+  <%= @location.titre %>
+</p>
+
+<p>
+  <strong>Adresse:</strong>
+  <%= @location.adresse %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @location.description %>
+</p>
+
+<p>
+  <strong>Etat:</strong>
+  <%= @location.etat %>
+</p>
+
+<p>
+  <strong>Prix:</strong>
+  <%= @location.prix %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @location.type_id %>
+</p>
+
+<p>
+  <strong>Nombre adulte:</strong>
+  <%= @location.nombre_adulte %>
+</p>
+
+<p>
+  <strong>Nombre enfant:</strong>
+  <%= @location.nombre_enfant %>
+</p>
+
+<p>
+  <strong>Nombre salon:</strong>
+  <%= @location.nombre_salon %>
+</p>
+
+<p>
+  <strong>Nombre chamber:</strong>
+  <%= @location.nombre_chamber %>
+</p>
+
+<p>
+  <strong>Nombre toillete:</strong>
+  <%= @location.nombre_toillete %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @location.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>
