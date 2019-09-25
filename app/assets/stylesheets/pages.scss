@@ -1,3 +1,17 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+header{
+    height: 60vh;
+    margin-top: -50px;
+    background-image: url(bko-plane-view.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.search{
+    margin: 20px;
+    background-color: white;
+    text-align: center;
+    margin-top: -5px;
+
+}
