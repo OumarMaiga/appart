@@ -10,6 +10,7 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
+    @reservation = Reservation.new
   end
 
   # GET /locations/new
@@ -28,6 +29,11 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
+        # Enregistrement des images de l'appartement
+        params[:images]['libelle'].each do |a|
+          @image = @location.images.create!(:libelle => a)
+        end
+
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
@@ -69,6 +75,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:titre, :adresse, :description, :etat, :prix, :type_id, :nombre_adulte, :nombre_enfant, :nombre_salon, :nombre_chamber, :nombre_toillete, :user_id)
+      params.require(:location).permit(:titre, :adresse, :description, :etat, :prix, :type_id, :nombre_adulte, :nombre_enfant, :nombre_salon, :nombre_chamber, :nombre_toillete, :user_id, images_attributes: [:id, :location, :libelle])
     end
 end

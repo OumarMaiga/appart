@@ -55,3 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Authentification
 gem 'devise', '~> 4.7', '>= 4.7.1'
+
+# Upload de photo
+gem 'carrierwave', '~> 2.0', '>= 2.0.2'

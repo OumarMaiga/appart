@@ -16,3 +16,17 @@
     </div>
         </center>
 </div>
+<section>
+    <div class="row">
+        <% @locations.each do |location| %>
+            <div class="col">
+                <h3><%= location.titre %></h3>
+                <% if location.images.present? %>
+                    <% location.images.each do |image| %>
+                        <%= image_tag image.libelle_url %>
+                    <% end %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+</section>

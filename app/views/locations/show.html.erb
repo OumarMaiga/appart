@@ -1,64 +1,67 @@
 <p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col s12">
+      <% if @location.images.present? %>
+        <div class="carousel carousel-slider">
+          <% @location.images.each do | image | %>
+            <a class="carousel-item" href="#"><%= image_tag(image.libelle_url, width: '100%', height: '400px') if image.libelle.present? %></a>
+          <% end %>
+        </div>
+      <% else %>
+        <a class="carousel-item" href="#"><%= image_tag image_url('maison.png'), width: '100%', height: '400px' %></a>
+      <% end %>
+    </div>
+  </div>
 
-<p>
-  <strong>Titre:</strong>
-  <%= @location.titre %>
-</p>
+  <div class="container">
+    <div class="row">
+      <div class="col s8">
+        <div class="row">
+          <div class="col s9">
+            <h5><%= @location.titre %></h5>
+            <p><b><%= @location.adresse %></b></p><br><br>
+            <p><%= @location.description %></p>
+          </div>
+          <div class="col s3">
+            <button class="<%= @location.etat ? "btn btn-success": "btn btn-danger" %>"><%= @location.etat ? "Diponible": "Occupé" %></button>
+            <p><b><%= @location.prix %> Fcfa / nuit</b></p>
+          </div>
+        </div><br>
+      </div>
+      <div class="col s4">
 
-<p>
-  <strong>Adresse:</strong>
-  <%= @location.adresse %>
-</p>
+            <!-- Réserver box modal -->
+            <button class="btn btn-primary modal-trigger" data-toggle="modal" data-target="#reserver">
+              Reserver
+            </button><br><br>
+  
+            <!-- Réserver modal structure -->
+            <div class="modal fade" id="reserver" tabindex="-1" role="dialog" aria-labelledby="reserverLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="reserverLabel">Reservation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <%= render  "/reservations/form", reservation: @reservation %>
+                  </div>
+                </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @location.description %>
-</p>
+              <div class="modal fade" id="reserver" tabindex="-1" role="dialog" aria-labelledby="reserverLabel" aria-hidden="true" class="modal modal-fixed-footer">
 
-<p>
-  <strong>Etat:</strong>
-  <%= @location.etat %>
-</p>
+                  <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+                  
+              </div>
 
-<p>
-  <strong>Prix:</strong>
-  <%= @location.prix %>
-</p>
+              <p><b>Pour toutes informations<br> contactez-nous au (223 71 31 65 44)</b></p>
+            </div>
+          </div>
 
-<p>
-  <strong>Type:</strong>
-  <%= @location.type_id %>
-</p>
+    </div>
+  </div>
 
-<p>
-  <strong>Nombre adulte:</strong>
-  <%= @location.nombre_adulte %>
-</p>
-
-<p>
-  <strong>Nombre enfant:</strong>
-  <%= @location.nombre_enfant %>
-</p>
-
-<p>
-  <strong>Nombre salon:</strong>
-  <%= @location.nombre_salon %>
-</p>
-
-<p>
-  <strong>Nombre chamber:</strong>
-  <%= @location.nombre_chamber %>
-</p>
-
-<p>
-  <strong>Nombre toillete:</strong>
-  <%= @location.nombre_toillete %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @location.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+</div>

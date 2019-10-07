@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def index
+    @locations = Location.all
   end
 
   def _nav

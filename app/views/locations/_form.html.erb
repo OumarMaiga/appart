@@ -41,6 +41,13 @@
     <%= form.select :type_id, Type.pluck(:libelle, :id) %>
   </div>
 
+  <%= form.fields_for :images do |p| %>
+    <div class="field">
+      <%= form.label :images %>
+      <%= p.file_field :libelle, :multiple => true, name: "images[libelle][]" %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :nombre_adulte %>
     <%= form.number_field :nombre_adulte %>

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :types
-  resources :locations
+  resources :locations do
+    resources :reservations
+  end
   get 'pages/users'
   root to: "pages#index"
   devise_for :users, controllers: { registrations: 'users/registrations' }

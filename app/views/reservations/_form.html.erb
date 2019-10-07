@@ -1,0 +1,55 @@
+
+      <%= form_for([@location, @reservation]) do |form| %>
+      <div class="modal-content">
+        <% if @reservation.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+      
+            <ul>
+              <% @reservation.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+                    
+        <div class="field">
+          <%= form.label :nom %>
+          <%= form.text_field :nom %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :prenom %>
+          <%= form.text_field :prenom %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :debut %>
+          <%= form.date_select :debut %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :fin %>
+          <%= form.date_select :fin %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :nombre_adulte %>
+          <%= form.number_field :nombre_adulte %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :nombre_enfant %>
+          <%= form.number_field :nombre_enfant %>
+        </div>
+      
+        <div class="field">
+          <%= form.label :montant_paye %>
+          <%= form.text_field :montant_paye %>
+        </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+    <%= form.submit 'Valider', :class => 'btn btn-success' %>
+  </div>
+  <% end %>
