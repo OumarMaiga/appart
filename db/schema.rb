@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_205250) do
+ActiveRecord::Schema.define(version: 2019_10_10_151522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,23 @@ ActiveRecord::Schema.define(version: 2019_09_28_205250) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["type_id"], name: "index_locations_on_type_id"
     t.index ["user_id"], name: "index_locations_on_user_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "location_id", null: false
+    t.bigint "user_id"
+    t.string "nom"
+    t.string "prenom"
+    t.date "debut"
+    t.date "fin"
+    t.integer "nombre_adulte"
+    t.integer "nombre_enfant"
+    t.bigint "montant_paye"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "telephone"
+    t.index ["location_id"], name: "index_reservations_on_location_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -72,5 +89,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_205250) do
   add_foreign_key "images", "locations"
   add_foreign_key "locations", "types"
   add_foreign_key "locations", "users"
+  add_foreign_key "reservations", "locations"
+  add_foreign_key "reservations", "users"
   add_foreign_key "types", "users"
 end

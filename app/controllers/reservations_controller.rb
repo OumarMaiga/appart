@@ -36,7 +36,8 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to location_reservation_path(@location, @reservation.id), notice: 'Reservation effection avec succès.' }
+        current_user.update(nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], telephone: params[:reservation][:telephone])
+        format.html { redirect_to @reservation, notice: 'Veuillez confirmer votre reservation.' }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { redirect_to location_path(@location), alert: 'Reservation non effection.' }
@@ -67,6 +68,10 @@ class ReservationsController < ApplicationController
       format.html { redirect_to reservations_url, notice: 'Reservation was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def my_reservation
+    @reservations = current_user.reservations.all
   end
 
   private

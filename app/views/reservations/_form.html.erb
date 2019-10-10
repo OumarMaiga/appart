@@ -12,44 +12,58 @@
             </ul>
           </div>
         <% end %>
-                    
-        <div class="field">
-          <%= form.label :nom %>
-          <%= form.text_field :nom %>
-        </div>
-      
-        <div class="field">
-          <%= form.label :prenom %>
-          <%= form.text_field :prenom %>
-        </div>
-      
-        <div class="field">
-          <%= form.label :debut %>
-          <%= form.date_select :debut %>
-        </div>
-      
-        <div class="field">
-          <%= form.label :fin %>
-          <%= form.date_select :fin %>
-        </div>
-      
-        <div class="field">
-          <%= form.label :nombre_adulte %>
-          <%= form.number_field :nombre_adulte %>
-        </div>
-      
-        <div class="field">
-          <%= form.label :nombre_enfant %>
-          <%= form.number_field :nombre_enfant %>
-        </div>
-      
-        <div class="field">
-          <%= form.label :montant_paye %>
-          <%= form.text_field :montant_paye %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="field">
+            <%= form.label :nom %>
+            <%= form.text_field :nom, value: current_user.nom if user_signed_in? %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :prenom %>
+            <%= form.text_field :prenom, value: current_user.prenom if user_signed_in? %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :telephone %>
+            <%= form.number_field :telephone, value: current_user.telephone if user_signed_in? %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :debut %>
+            <%= form.date_select :debut %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :fin %>
+            <%= form.date_select :fin %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :nombre_adulte %>
+            <%= form.number_field :nombre_adulte %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :nombre_enfant %>
+            <%= form.number_field :nombre_enfant %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :montant_paye %>
+            <%= form.text_field :montant_paye %>
+          </div>
+        <% else%>
+          <div class="notice">
+            Veuillez vous connecter s'il vous plait !!!
+          </div>
+        <% end %>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-    <%= form.submit 'Valider', :class => 'btn btn-success' %>
+    <% if user_signed_in? %>
+      <%= form.submit 'Valider', :class => 'btn btn-success' %>
+    <% else %>
+      <%= link_to  "Connexion", new_user_session_path, :class => 'btn btn-success' %>
+    <% end %>
   </div>
   <% end %>

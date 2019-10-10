@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :locations do
     resources :reservations
   end
+  resources :reservations
+  get 'reservations/my_reservation', to: 'reservations#my_reservation'
   get 'pages/users'
   root to: "pages#index"
   devise_for :users, controllers: { registrations: 'users/registrations' }

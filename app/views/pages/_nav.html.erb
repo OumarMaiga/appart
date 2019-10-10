@@ -10,9 +10,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">A propos</a>
                 </li>
+                <% if user_signed_in? %>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <%= link_to "Mes reservations", reservations_my_reservation_path, class: "nav-link" %>
                 </li>
+                <% end %>
             </ul>
         </div>
         <div class="col d-flex justify-content-end">

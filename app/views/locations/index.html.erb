@@ -11,13 +11,13 @@
   </ol>-->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <%= image_tag "maison.png", class: "d-block w-100", alt: "...", heigth: "100px", width: '250px' %>
+      <%= image_tag "maison.png", class: "d-block w-10", alt: "..." %>
     </div>
     <div class="carousel-item">
-      <%= image_tag "maison.png", class: "d-block w-100", alt: "...", heigth: "100px" %>
+      <%= image_tag "maison.png", class: "d-block w-10", alt: "..." %>
     </div>
     <div class="carousel-item">
-      <%= image_tag "maison.png", class: "d-block w-100", alt: "...", heigth: "100px" %>
+      <%= image_tag "maison.png", class: "d-block w-10", alt: "..." %>
     </div>
   </div>
   <!--<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -41,17 +41,17 @@
       <div class="row" id="appart">
         <div class="col-4">
           <% if location.images.present? %>
-          <div class="carousel slider" data-ride="carousel" id="carouselExampleIndicators">
+          <div class="carousel slide" data-ride="carousel" id="carouselExampleIndicators">
               <div class="carousel-inner">
             <% location.images.each do |image| %>
               <div class="carousel-item">
-                <%= image_tag image.libelle_url, heigth: '90%', width: '250px' %>
+                <%= image_tag image.libelle_url, class: "d-block w-100", heigth: '90%', width: '250px' %>
               </div>
             <% end %>
               </div>
           </div>
           <% else %>
-            <a class="carousel-item" href="<%= location_path(location) %>"><%= image_tag image_url('maison.png'), heigth: '90%', width: '250px' %></a>
+            <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
           <% end %>
         </div>
         <div class="col-6">
@@ -66,12 +66,12 @@
               <%= location.description %>
             </li>
             <li>
-              Reservation possible avec carte de crédit
+              Reservation possible avec orange money
             </li>
           </ul>
         </div>
         <div class="col-2">
-          <div class="row d-flex justify-content-end"><%= location.prix %> F cfa par nuit</div>
+          <div class="row d-flex justify-content-end"><%= location.prix %> F cfa / nuit</div>
           <div class="row d-flex justify-content-end">
             <%= link_to  "Detail", location_path(location.id), class: "btn btn-success" %>
           </div>
@@ -81,19 +81,3 @@
     </div>
   </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">NOUVELLE ANNEE</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        </div>
-        </div>
-    </div>
-</div>  
