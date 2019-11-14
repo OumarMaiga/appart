@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
+    @locations = Location.includes(:images, :type).all
   end
 
   # GET /locations/1
@@ -25,13 +25,18 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = current_user.locations.new(location_params)
+    puts"-------------"
+    puts params[:location][:adresse].inspect
+      @location = current_user.locations.new(location_params) if user_signed_in?
 
     respond_to do |format|
       if @location.save
         # Enregistrement des images de l'appartement
-        params[:images]['libelle'].each do |a|
-          @image = @location.images.create!(:libelle => a)
+
+        if is_image?
+          params[:images]['libelle'].each do |a|
+            @image = @location.images.create!(:libelle => a)
+          end
         end
 
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
@@ -43,11 +48,22 @@ class LocationsController < ApplicationController
     end
   end
 
+  def is_image?
+    params[:images] != nil
+  end
+
   # PATCH/PUT /locations/1
   # PATCH/PUT /locations/1.json
   def update
     respond_to do |format|
       if @location.update(location_params)
+        
+        # Enregistrement des images de l'appartement
+        if is_image?
+          params[:images]['libelle'].each do |a|
+            @image = @location.images.create!(:libelle => a)
+          end
+        end
         format.html { redirect_to @location, notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
@@ -75,6 +91,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:titre, :adresse, :description, :etat, :prix, :type_id, :nombre_adulte, :nombre_enfant, :nombre_salon, :nombre_chamber, :nombre_toillete, :user_id, images_attributes: [:id, :location, :libelle])
+      params.require(:location).permit(:titre, :adresse, :description, :etat, :prix, :duree, :type_id, :nombre_adulte, :nombre_enfant, :nombre_salon, :nombre_chamber, :nombre_toillete, :nom_bailleur, :email_bailleur, :telephone_bailleur, :adresse_bailleur, :user_id, images_attributes: [:id, :location, :libelle])
     end
 end

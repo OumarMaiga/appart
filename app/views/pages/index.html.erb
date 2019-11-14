@@ -1,32 +1,45 @@
 <header>
 </header>
-<div class="row">
-        <center>
+<div class="row justify-content-md-center">
     <div class="search">
-            <%= form_tag("/search", method: "get", class: 'form-inline') do %>
-                <div class="input-field row">
-                        <%= text_field(:q, class: 'form-control') %>
-                        <%= date_field :debut, class: 'form-control' %>
+            <%= form_tag(search_path, method: :get, class: 'form-inline') do %>
+                <div id="search-data" class="input-field search-bar" data-adresses="<%= @adresses.to_json %>">
+                        <%= text_field_tag :query, nil, autocomplete: 'off', placeholder: "Quartier..." %>
+                        <%= date_field_tag :debut %>
                         -
-                        <%= date_field :fin, class: 'form-control' %>
-                        <%= number_field :nombre, class: 'form-control' %>
-                    <%= submit_tag('Rechercher', :class => 'waves-effect waves-light btn green form-control') %>
+                        <%= date_field_tag :fin %>
+                        <%= number_field_tag :nombre_personne %>
+                    <%= submit_tag 'Rechercher', :class => 'btn btn-primary form-control' %>
                 </div>
             <% end %>
     </div>
-        </center>
 </div>
 <section>
-    <div class="row">
+    <div class="container">
+        <div class="row">
         <% @locations.each do |location| %>
-            <div class="col">
-                <h3><%= location.titre %></h3>
-                <% if location.images.present? %>
+        <div class="col-md-3" id="appart">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <% if location.images.present? %>
+                <div class="carousel-inner">
                     <% location.images.each do |image| %>
-                        <%= image_tag image.libelle_url %>
+                    <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                        <a href="<%= location_path(location.id) %>">
+                            <div class="" id="image" style="background-image: url(<%= image.libelle_url %>);">
+                                    <span class="badge badge-warning float-md-left" id="badge"><%= location.type.libelle %></span><span class="float-md-right text-center badge badge-light" id="badge"><%= location.prix %>f<br><%= location.duree %></span>
+                            </div>
+                        </a>
+                    </div>
                     <% end %>
-                <% end %>
+                </div>
+            <% else %>
+                <div class="carousel-item">
+                <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
+                </div>
+            <% end %>
             </div>
+        </div>
         <% end %>
+        </div>
     </div>
 </section>

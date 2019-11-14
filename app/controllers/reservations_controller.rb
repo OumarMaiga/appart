@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy, :confirmer]
+  after_action :change_notification, only: [:show]
 
   # GET /reservations
   # GET /reservations.json
@@ -29,15 +29,20 @@ class ReservationsController < ApplicationController
     @location = params[:location_id]
 
     if user_signed_in?
-      @reservation = current_user.reservations.new(location_id: params[:location_id], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], nombre_adulte: params[:reservation][:nombre_adulte], nombre_enfant: params[:reservation][:nombre_enfant], montant_paye: params[:reservation][:montant_paye])
+      @reservation = current_user.reservations.new(location_id: params[:location_id], email: current_user.email, nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], nombre_adulte: params[:reservation][:nombre_adulte], nombre_enfant: params[:reservation][:nombre_enfant], montant_paye: params[:reservation][:montant_paye])
     else
-      @reservation = Reservation.new(location_id: params[:location_id], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], nombre_adulte: params[:reservation][:nombre_adulte], nombre_enfant: params[:reservation][:nombre_enfant], montant_paye: params[:reservation][:montant_paye])
+      @reservation = Reservation.new(location_id: params[:location_id], email: params[:reservation][:email], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], nombre_adulte: params[:reservation][:nombre_adulte], nombre_enfant: params[:reservation][:nombre_enfant], montant_paye: params[:reservation][:montant_paye])
     end
 
     respond_to do |format|
       if @reservation.save
-        current_user.update(nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], telephone: params[:reservation][:telephone])
-        format.html { redirect_to @reservation, notice: 'Veuillez confirmer votre reservation.' }
+        # Mise à jour du compte user
+=begin
+        if user_signed_in?
+          current_user.update(nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], telephone: params[:reservation][:telephone])
+        end
+=end
+        format.html { redirect_to @reservation, notice: "Un mail de confirmation  vous sera envoyer a l'adresse #{@reservation.email}" }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { redirect_to location_path(@location), alert: 'Reservation non effection.' }
@@ -74,6 +79,14 @@ class ReservationsController < ApplicationController
     @reservations = current_user.reservations.all
   end
 
+  def confirmer
+    @reservation.update(confirmer: :true)
+    ReservationMailer.reservation_confirmer(@reservation).deliver_now
+    respond_to do |format|
+      format.html { redirect_to @reservation, notice: "Un mail confirmation sera envoyé à #{@reservation.email}" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
@@ -82,6 +95,12 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:location_id, :user_id, :nom, :prenom, :debut, :fin, :nombre_adulte, :nombre_enfant, :montant_paye)
+      params.require(:reservation).permit(:location_id, :email, :user_id, :nom, :prenom, :telephone, :debut, :fin, :nombre_adulte, :nombre_enfant, :montant_paye)
+    end
+
+    def change_notification
+      if Admin?
+        Notification.find_by_reservation_id(@reservation.id).update(vue: true)
+      end
     end
 end

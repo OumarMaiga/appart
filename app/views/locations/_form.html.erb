@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :adresse %>
-    <%= form.text_area :adresse %>
+    <%= form.text_field :adresse %>
   </div>
 
   <div class="field">
@@ -27,13 +27,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :etat %>
+    <%= form.label :'Activer' %>
     <%= form.check_box :etat %>
   </div>
 
   <div class="field">
     <%= form.label :prix %>
     <%= form.number_field :prix %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duree %>
+    <%= form.select :duree, [['Prix par...', nil], 'nuit', 'mois'] %>
   </div>
 
   <div class="field">
@@ -49,12 +54,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :nombre_adulte %>
+    <%= form.label :'Nombre max d\'adulte' %>
     <%= form.number_field :nombre_adulte %>
   </div>
 
   <div class="field">
-    <%= form.label :nombre_enfant %>
+    <%= form.label :'Nombre max d\'enfant' %>
     <%= form.number_field :nombre_enfant %>
   </div>
 
@@ -71,6 +76,26 @@
   <div class="field">
     <%= form.label :nombre_toillete %>
     <%= form.number_field :nombre_toillete %>
+  </div>
+
+  <div class="field">
+    <%= form.label :'Nom complet du bailleur', placeholder: 'Nom complet du bailleur' %>
+    <%= form.text_field :nom_bailleur %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email_bailleur %>
+    <%= form.email_field :email_bailleur, placeholder: 'Email du bailleur' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :telephone_bailleur %>
+    <%= form.number_field :telephone_bailleur, placeholder: 'Telephone du bailleur' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :'Adresse du bailleur' %>
+    <%= form.text_area :adresse_bailleur, placeholder: 'Adresse du bailleur' %>
   </div>
 
   <div class="field">

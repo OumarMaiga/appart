@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_10_151522) do
+ActiveRecord::Schema.define(version: 2019_10_11_095654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_10_10_151522) do
     t.text "description"
     t.boolean "etat"
     t.bigint "prix"
+    t.string "duree"
     t.bigint "type_id"
     t.bigint "nombre_adulte"
     t.bigint "nombre_enfant"
@@ -36,15 +37,30 @@ ActiveRecord::Schema.define(version: 2019_10_10_151522) do
     t.bigint "nombre_chamber"
     t.bigint "nombre_toillete"
     t.bigint "user_id", null: false
+    t.string "nom_bailleur"
+    t.string "email_bailleur"
+    t.bigint "telephone_bailleur"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "adresse_bailleur"
+    t.text "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition"
     t.index ["type_id"], name: "index_locations_on_type_id"
     t.index ["user_id"], name: "index_locations_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "reservation_id", null: false
+    t.boolean "vue", default: false
+    t.string "type_notification"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reservation_id"], name: "index_notifications_on_reservation_id"
   end
 
   create_table "reservations", force: :cascade do |t|
     t.bigint "location_id", null: false
     t.bigint "user_id"
+    t.string "email"
     t.string "nom"
     t.string "prenom"
     t.date "debut"
@@ -52,9 +68,10 @@ ActiveRecord::Schema.define(version: 2019_10_10_151522) do
     t.integer "nombre_adulte"
     t.integer "nombre_enfant"
     t.bigint "montant_paye"
+    t.bigint "telephone"
+    t.boolean "confirmer", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "telephone"
     t.index ["location_id"], name: "index_reservations_on_location_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -74,6 +91,10 @@ ActiveRecord::Schema.define(version: 2019_10_10_151522) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.string "nom"
     t.string "prenom"
     t.text "adresse"
@@ -89,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_10_10_151522) do
   add_foreign_key "images", "locations"
   add_foreign_key "locations", "types"
   add_foreign_key "locations", "users"
+  add_foreign_key "notifications", "reservations"
   add_foreign_key "reservations", "locations"
   add_foreign_key "reservations", "users"
   add_foreign_key "types", "users"

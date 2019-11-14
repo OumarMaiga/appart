@@ -15,3 +15,10 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import { toggleDateInputs } from 'channels/reservation';
+import { autocompleteSearch } from 'channels/autocomplete';
+
+
+toggleDateInputs();
+autocompleteSearch();

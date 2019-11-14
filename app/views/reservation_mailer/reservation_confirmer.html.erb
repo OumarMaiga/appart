@@ -1,0 +1,5 @@
+<p>Bienvenue encore sur appart.com <%= @reservation.email %>!</p>
+
+<p>Votre reservartion de <b><%= @reservation.location.titre %></b> du <b><%= @reservation.debut %></b> au <b><%= @reservation.fin %></b> a bien été confirmer</p>
+
+<p><%= link_to 'Voir reservation', @reservation %></p>
