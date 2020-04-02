@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_11_095654) do
+ActiveRecord::Schema.define(version: 2020_03_14_031629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "caracteristiques", force: :cascade do |t|
+    t.string "libelle"
+    t.string "icon"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "caracteristiques_locations", id: false, force: :cascade do |t|
+    t.bigint "caracteristique_id"
+    t.bigint "location_id"
+    t.index ["caracteristique_id"], name: "index_caracteristiques_locations_on_caracteristique_id"
+    t.index ["location_id"], name: "index_caracteristiques_locations_on_location_id"
+  end
 
   create_table "images", force: :cascade do |t|
     t.string "libelle"
@@ -82,6 +96,7 @@ ActiveRecord::Schema.define(version: 2019_10_11_095654) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
     t.index ["user_id"], name: "index_types_on_user_id"
   end
 

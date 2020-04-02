@@ -1,89 +1,63 @@
-
-<p id="notice"><%= notice %></p>
-<div class="container-fluid">
-  <div class="row show_image">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      <% if @location.images.present? %>
-        <div class="carousel-inner">
-          <% @location.images.each do | image | %>
-            <div class="carousel-item <%= "active" if image.id == @location.images.first.id  %>" >
-              <%= image_tag(image.libelle_url(:large), width: '100%', height: '400px') if image.libelle.present? %>
-            </div>
-          <% end %>
-        </div>
-
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-      <% else %>
-        <div>
-          <%= image_tag image_url('maison.png'), width: '100%', height: '400px' %>
-        </div>
-      <% end %>
-      </div>
-  </div>
-
-  <div class="container">
-        <div class="row">
-          <div class="col md-6">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'pages/search' %>
+    </div>
+    <div class="col-md-9">
+    
             <h3 class="card-title" id="titre">
               <%= @location.titre %> 
               <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= @location.type.libelle %></span> 
-              <p class="card-text"><small class="text-muted"><%= @location.adresse %></small></p>
+              <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= @location.adresse %></small></p>
             </h3>
+      <div id="imageContainer">
+      <div class="image_head">
+          <%= image_tag(@image_last.libelle_url, width: '100%', height: '400px') if @image_last.present? %>
+      </div>
+      <div>
+        <% @images.each do |image| %>
+            <%= image_tag(image.libelle_url, width: '160px', height: '150px') if image.libelle.present? %>
+        <% end %>
             <p><%= @location.description %></p>
-          </div>
-          <div class="col md-6">
-            <div class="row">
-              <div class="col-md-6">
-                <!--<button class="<%= @location.etat ? "btn btn-success": "btn btn-danger" %>"><%= @location.etat ? "Diponible": "Occupé" %></button>-->
-                <h4><%= "CARACTERISTIQUE" if @location.nombre_salon != nil || @location.nombre_chamber != nil || @location.nombre_toillete != nil %></h4>
-                <ul>
+            <h5><%= "CARACTERISTIQUES" if @location.nombre_salon != nil || @location.nombre_chamber != nil || @location.nombre_toillete != nil %></h5>
                   <% if @location.nombre_salon != nil %>
-                  <li>
-                    <h5>Salon: <small><%= @location.nombre_salon %></small></h5>
-                  </li>
+                    Salon: <small><%= @location.nombre_salon %></small>
                   <% end %>
 
                   <% if @location.nombre_chamber != nil %>
-                  <li>
-                    <h5>Chambre: <small><%= @location.nombre_chamber %></small></h5>
-                  </li>
+                    Chambre: <small><%= @location.nombre_chamber %></small>
                   <% end %>
 
                   <% if @location.nombre_toillete != nil %>
-                  <li>
-                    <h5>Toillete: <small><%= @location.nombre_toillete %></small></h5>
-                  </li>
+                    Toillete: <small><%= @location.nombre_toillete %></small>
                   <% end %>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <% if Admin? %>
-                  <h4>BAILLEUR</h4>
-                  <h5>Nom du bailleur: <small><%= @location.nom_bailleur %></small></h5>
-                  <h5>Email: <small><%= @location.email_bailleur %></small></h5>
-                  <h5>Telephone: <small><%= @location.telephone_bailleur %></small></h5>
-                <% end %>
-              </div>
-            </div>
-            
-            <b><%= @location.prix %> Fcfa / <%= @location.duree %></b><br>
+                  <br>
+                  <% unless @location.caracteristiques.empty? %>
+                    <% @location.caracteristiques.each do |caracteristique| %>
+                      <span><i class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
+                    <% end %>
+                  <% end %>
+
+            <div class="float-md-right">
+            <b><span class="badge badge-success prix"><%= @location.prix %> Fcfa / <%= @location.duree %></span></b><br>
             <!-- Réserver box modal -->
             <button class="btn btn-primary modal-trigger" data-toggle="modal" data-target="#reserver" class="d-flex align-items-end justify-content-end">
               Reserver
             </button>
-
             <p><b>Pour toutes informations<br> contactez-nous au (223 71 31 65 44)</b></p>
+            </div>
 
-          </div>
-        </div>
+                <% if Admin? %>
+                  <h5>BAILLEUR</h5>
+                  Nom du bailleur: <small><%= @location.nom_bailleur %></small><br>
+                  Email: <small><%= @location.email_bailleur %></small><br>
+                  Telephone: <small><%= @location.telephone_bailleur %></small><br>
+                <% end %>
       </div>
+      </div>
+    </div>
+
+  </div>
   
             <!-- Réserver modal structure -->
             <div class="modal fade" id="reserver" tabindex="-1" role="dialog" aria-labelledby="reserverLabel" aria-hidden="true">

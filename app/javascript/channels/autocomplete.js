@@ -3,8 +3,8 @@ import autocomplete from 'js-autocomplete';
 
 
 const autocompleteSearch = function() {
-    console.log("Autocomplete");
-    window.onload = function () {
+
+    $(document).ready(function() {
 
         const adresses = JSON.parse(document.getElementById('search-data').dataset.adresses)
         const searchInput = document.getElementById('query');
@@ -24,7 +24,7 @@ const autocompleteSearch = function() {
             },
             });
         }
-    }
+    });
 };
 
 export { autocompleteSearch };

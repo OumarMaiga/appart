@@ -11,6 +11,8 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @reservation = Reservation.new
+    @images = Image.where(location_id: @location)
+    @image_last = @images.last
   end
 
   # GET /locations/new
@@ -83,6 +85,15 @@ class LocationsController < ApplicationController
     end
   end
 
+  #GET /location/1/type
+  def type
+    @type_id = params[:id]
+    @type = Type.find(@type_id)
+    @locations = Location.where(type_id: @type_id).includes(:images, :type).limit(6)
+    @adresses = Location.distinct.where(type_id: @type_id).limit(6).pluck(:adresse)
+    @three_adresses = Location.distinct.where(type_id: @type_id).limit(3).pluck(:adresse)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
@@ -91,6 +102,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:titre, :adresse, :description, :etat, :prix, :duree, :type_id, :nombre_adulte, :nombre_enfant, :nombre_salon, :nombre_chamber, :nombre_toillete, :nom_bailleur, :email_bailleur, :telephone_bailleur, :adresse_bailleur, :user_id, images_attributes: [:id, :location, :libelle])
+      params.require(:location).permit(:titre, :adresse, :description, :etat, :prix, :duree, :type_id, :nombre_adulte, :nombre_enfant, :nombre_salon, :nombre_chamber, :nombre_toillete, :nom_bailleur, :email_bailleur, :telephone_bailleur, :adresse_bailleur, :user_id, images_attributes: [:id, :location, :libelle], caracteristique_ids: [])
     end
 end

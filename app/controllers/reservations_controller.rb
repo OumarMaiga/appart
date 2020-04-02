@@ -11,6 +11,8 @@ class ReservationsController < ApplicationController
   # GET /reservations/1
   # GET /reservations/1.json
   def show
+    @images = Image.where(location_id: @reservation.location)
+    @image = @images.last
   end
 
   # GET /reservations/new

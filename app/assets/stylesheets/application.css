@@ -12,11 +12,28 @@
  *
  *= require_tree .
  *= require_self
- */
- body{
-    margin: 0%;
-    padding: 0%;
+*/
+
+ .search_container {
+     background-color: rgb(255, 153, 28);
+     padding: 10px;
+     margin-top: 30PX;
  }
- #titre{
-    text-transform: uppercase;
- }
+
+.input-group-prepend span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+
+ .login_btn{
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}
+    
+.login_btn:hover{
+    color: black;
+    background-color: white;
+}

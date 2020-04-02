@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
 
+  devise_for :users, controllers: { 
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    confirmations: 'users/confirmations'  
+  }
+
+  resources :caracteristiques
   root to: "pages#index"
   resources :adresses
   
   resources :types
 
   resources :locations do
+    get 'type', on: :member
     resources :reservations
   end
 
@@ -24,8 +33,11 @@ Rails.application.routes.draw do
 
   get 'pages/query', to: 'pages#query'
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  get '/:adresse', to: 'pages#adresse', as: 'adresse'
+
+  get '/:type/:adresse', to: 'pages#type_adresse', as: 'type_adresse'
 
   resources :notifications, only: [:index, :show]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Libelle:</strong>
+  <%= @caracteristique.libelle %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @caracteristique.icon %>
+</p>
+
+<%= link_to 'Edit', edit_caracteristique_path(@caracteristique) %> |
+<%= link_to 'Back', caracteristiques_path %>

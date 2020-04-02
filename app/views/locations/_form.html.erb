@@ -1,4 +1,4 @@
-<%= form_with(model: location, local: true) do |form| %>
+<%= simple_form_for(@location, local: true) do |form| %>
   <% if location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
@@ -77,6 +77,12 @@
     <%= form.label :nombre_toillete %>
     <%= form.number_field :nombre_toillete %>
   </div>
+
+    
+  <div class="field">
+    <%= form.association :caracteristiques, as: :check_boxes, label: "Caracteristique: ", class: "form-control", :label_method => lambda { |caracteristique| "#{caracteristique.libelle}" } %>
+  </div>
+  
 
   <div class="field">
     <%= form.label :'Nom complet du bailleur', placeholder: 'Nom complet du bailleur' %>

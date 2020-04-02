@@ -12,14 +12,26 @@
             </ul>
           </div>
         <% end %>
+
+
+          <div class="field">
+            <%= form.label :debut %>
+            <%= form.date_field :debut %>
+          </div>
+        
+          <div class="field">
+            <%= form.label :fin %>
+            <%= form.date_field :fin %>
+          </div>
+          
         <% unless user_signed_in? %>
           <div class="field">
             <%= form.label :email %>
-            <span>Un mail de confirmation sera envoyez </span><br>
-            <%= form.text_field :email %>
+            <%= form.text_field :email %><br>
+            <span>Un mail de confirmation sera envoyez </span>
           </div>
         <% end %>
-          <div class="field">
+          <!--<div class="field">
             <%= form.label :nom %>
             <%= form.text_field :nom, value: current_user.nom if user_signed_in? %>
             <%= form.text_field :nom unless user_signed_in? %>
@@ -29,27 +41,17 @@
             <%= form.label :prenom %>
             <%= form.text_field :prenom, value: current_user.prenom if user_signed_in? %>
             <%= form.text_field :prenom unless user_signed_in? %>
-          </div>
+          </div>-->
         
           <div class="field">
             <%= form.label :telephone %>
-            <span>Le numéro sur le quel vous êtes joingnable</span><br>
             <%= form.number_field :telephone, value: current_user.telephone if user_signed_in? %>
-            <%= form.number_field :telephone unless user_signed_in? %>
+            <%= form.number_field :telephone unless user_signed_in? %><br>
+            <span>Le numéro sur le quel vous êtes joingnable</span>
           </div>
         
-          <div class="field">
-            <%= form.label :debut %>
-            <%= form.date_field :debut, as: :string %>
-          </div>
-        
-          <div class="field">
-            <%= form.label :fin %>
-            <%= form.date_field :fin, as: :string %>
-            <input type="text" name="" id="test" value="44">
-          </div>
 
-          <div class="field">
+          <!--<div class="field">
             <%= form.label :nombre_adulte %>
             <%= form.number_field :nombre_adulte %>
           </div>
@@ -62,7 +64,7 @@
           <div class="field">
             <%= form.label :montant_paye %>
             <%= form.text_field :montant_paye %>
-          </div>
+          </div>-->
         </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

@@ -61,3 +61,6 @@ gem 'carrierwave', '~> 2.0', '>= 2.0.2'
 
 # Redimentionnement de l'image
 gem 'mini_magick', '~> 4.9', '>= 4.9.5'
+
+#Simple Form
+gem 'simple_form'
