@@ -13,12 +13,48 @@
  *= require_tree .
  *= require_self
 */
+.navigateur{
+    background-color: yellow;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.background{
+    background-image: url(bko-plane-view.jpg);
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+.layer{
+    background-color: rgba(251, 255, 0, 0.6);
+    position: absolute;
+    height: 400px;
+    width: 100%;
+    padding-top: 40px;
+    margin: auto;
+    padding: 20px;
+}
 
- .search_container {
-     background-color: rgb(255, 153, 28);
-     padding: 10px;
-     margin-top: 30PX;
- }
+
+.titre {
+    font-size: 62px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 48px;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.search{
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+}
+.search-bar{
+    background-color: white;
+    padding: 10px;
+    border-radius: 2%;
+}
 
 .input-group-prepend span{
     width: 50px;

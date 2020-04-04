@@ -13,6 +13,9 @@ class LocationsController < ApplicationController
     @reservation = Reservation.new
     @images = Image.where(location_id: @location)
     @image_last = @images.last
+
+    # Autocomplete
+    @adresses = Location.distinct.pluck(:adresse)
   end
 
   # GET /locations/new
