@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.includes(:images, :type).all
+    @locations = Location.includes(:images, :type).all.page params[:page]
   end
 
   # GET /locations/1

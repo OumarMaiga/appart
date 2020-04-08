@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>
 <%- if controller_name == 'pages' %>
 <h1>Type de  location</h1>
 <% else %>
 <h1>Locations</h1>
 <% end %>
+-->
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -17,55 +18,59 @@
       </div>
     </div>
     <div class="col-md-9">
-  <% @locations.each do |location| %>
-      <div class="card md-3" id="appart">
-        <div class="row no-gutters">
-        <div class="col-md-4">
-          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <% if location.images.present? %>
-                <div class="carousel-inner">
-                  <% location.images.each do |image| %>
-                  <a href="<%= location_path(location.id) %>">
-                    <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
-                      <%= image_tag image.libelle_url, class: "image" %>
-                    </div>
-                  </a>
-                  <% end %>
-                </div>
-            <% else %>
-              <div class="carousel-item">
-                <%= image_tag 'maison.png', class: "image" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h3 class="card-title" id="titre">
-              <%= link_to location.titre, location_path(location.id) %> 
-              <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= location.type.libelle %></span> 
-              <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= location.adresse %></small></p>
-            </h3>
-            <hr>
-          <div class="row">
-            <div class="col-md-8">
-              <ul>
-                <li>
-                  <%= location.description %>
-                </li>
-              </ul>
-            </div>
+      <% @locations.each do |location| %>
+          <div class="card md-3" id="appart">
+            <div class="row no-gutters">
             <div class="col-md-4">
-              <div class="row d-flex justify-content-end">
-                <span class="badge badge-success float-md-right" style="font-size: 14px;"><%= location.prix %>F / <%= location.duree %></span> 
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <% if location.images.present? %>
+                    <div class="carousel-inner">
+                      <% location.images.each do |image| %>
+                      <a href="<%= location_path(location.id) %>">
+                        <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                          <%= image_tag image.libelle_url, class: "image" %>
+                        </div>
+                      </a>
+                      <% end %>
+                    </div>
+                <% else %>
+                  <div class="carousel-item">
+                    <%= image_tag 'maison.png', class: "image" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h3 class="card-title" id="titre">
+                  <%= link_to location.titre, location_path(location.id) %> 
+                  <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= location.type.libelle %></span> 
+                  <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= location.adresse %></small></p>
+                </h3>
+                <hr>
+              <div class="row">
+                <div class="col-md-8">
+                  <ul>
+                    <li>
+                      <%= location.description %>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-4">
+                  <div class="row d-flex justify-content-end">
+                    <span class="badge badge-success float-md-right" style="font-size: 14px;"><%= location.prix %>F / <%= location.duree %></span> 
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        </div>
+      <% end %>
+      <div class="pagination">
+          <%= link_to_previous_page @locations, '< Précédent', class: "btn btn-warning" %>
+          <%= link_to_next_page @locations, 'Suivant >', class: "btn btn-warning" %>
       </div>
-    </div>
-    </div>
-  <% end %>
     </div>
   </div>
 </div>

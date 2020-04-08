@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  
   def dates_indisponible
 
     Reservation.unscoped.pluck(:debut, :fin).map do |range|
@@ -70,7 +71,7 @@ class PagesController < ApplicationController
   end
 
   def adresse
-    @locations = Location.where(adresse: params[:adresse])
+    @locations = Location.where(adresse: params[:adresse]).page params[:page]
     if @locations
       respond_to do |format|
         format.html { render :template => 'locations/index' }
@@ -79,7 +80,7 @@ class PagesController < ApplicationController
   end
 
   def type_adresse
-    @locations = Location.where(type_id: params[:type]).where(adresse: params[:adresse])
+    @locations = Location.where(type_id: params[:type]).where(adresse: params[:adresse]).page params[:page]
     if @locations
       respond_to do |format|
         format.html { render :template =>'locations/index' }
