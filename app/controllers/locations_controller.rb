@@ -90,8 +90,9 @@ class LocationsController < ApplicationController
 
   #GET /location/1/type
   def type
-    @type_id = params[:id]
-    @type = Type.find(@type_id)
+    @type = params[:id]
+    @type = Type.find_by_slug(@type)
+    @type_id = @type.id
     @locations = Location.where(type_id: @type_id).includes(:images, :type).limit(6)
     @adresses = Location.distinct.where(type_id: @type_id).limit(6).pluck(:adresse)
     @three_adresses = Location.distinct.where(type_id: @type_id).limit(3).pluck(:adresse)
@@ -100,7 +101,7 @@ class LocationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
-      @location = Location.find(params[:id])
+      @location = Location.find_by_slug(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

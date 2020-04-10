@@ -21,7 +21,7 @@ class PagesController < ApplicationController
   def search
     # Recuperation de tous les locations d'une adresse
     add = Location.arel_table
-    @locations = Location.where(add[:adresse].matches("%#{ params[:query]}")).includes(:images, :type).all
+    @locations = Location.where(add[:adresse].matches("%#{ params[:query]}")).includes(:images, :type).all.page params[:page]
     # Suppression des locations déjà reserver 
     @locations.each do |location|
       @reservations = Reservation.where(location_id: location.id).all
@@ -80,7 +80,8 @@ class PagesController < ApplicationController
   end
 
   def type_adresse
-    @locations = Location.where(type_id: params[:type]).where(adresse: params[:adresse]).page params[:page]
+    @type_id = Type.where(slug: params[:type])
+    @locations = Location.where(type_id: @type_id).where(adresse: params[:adresse]).includes(:images, :type).page params[:page]
     if @locations
       respond_to do |format|
         format.html { render :template =>'locations/index' }

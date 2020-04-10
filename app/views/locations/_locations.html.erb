@@ -9,7 +9,7 @@
                     <div class="carousel-inner">
                         <% location.images.each do |image| %>
                         <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
-                            <a href="<%= location_path(location.id) %>">
+                            <a href="<%= location_path(location.slug) %>">
                                 <div class="" id="image" style="background-image: url(<%= image.libelle_url %>);">
                                     <span class="badge badge-warning float-md-left" id="badge"><%= location.type.libelle %></span><span class="float-md-right text-center badge badge-success" id="badge"><%= location.prix %>f<br><%= location.duree %></span>
                                 </div>

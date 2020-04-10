@@ -15,6 +15,13 @@ class Location < ApplicationRecord
     end
   end
 
+  # Pagination
   paginates_per(5)
+
+  # Url
+  acts_as_url :titre, url_attribute: :slug
+  def to_param
+      slug
+  end
 
 end

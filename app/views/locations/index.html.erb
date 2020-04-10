@@ -26,7 +26,7 @@
                 <% if location.images.present? %>
                     <div class="carousel-inner">
                       <% location.images.each do |image| %>
-                      <a href="<%= location_path(location.id) %>">
+                      <a href="<%= location_path(location.slug) %>">
                         <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
                           <%= image_tag image.libelle_url, class: "image" %>
                         </div>

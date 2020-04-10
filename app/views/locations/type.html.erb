@@ -22,12 +22,12 @@
                     %>
                     <div class="col">
                         <div class="card">
-                            <a href="<%= location_path(location.id) %>">
+                            <a href="<%= location_path(location.slug) %>">
                                 <%= image_tag @image.libelle_url, class: "card-img-top", alt: location.titre %>
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="<%= location_path(location.id) %>">
+                                    <a href="<%= location_path(location.slug) %>">
                                         <%= location.titre %>
                                     </a>
                                     <br>
@@ -58,7 +58,7 @@
                 <% 
                     @location_adresse = Location.where(adresse: adresse).first
                 %>
-                        <a href="<%= type_adresse_path(@type.id, adresse) %>" class="adresse-type">
+                        <a href="<%= type_adresse_path(@type.slug, adresse) %>" class="adresse-type">
                                 <%= adresse %><br>
                                 <%= Location.where(type_id: @type.id).where(adresse: adresse).count %> <%= @type.libelle %>s
                         </a>
