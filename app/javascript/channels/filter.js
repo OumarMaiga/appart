@@ -1,8 +1,6 @@
 const filter = function() {
     $(document).ready( function() {
-        console.log("Filterrr");
         $('input[type="checkbox"]').change(function() {
-            console.log("checkbox "+this.id+" clicked");
 
             $.ajax({
                 url: '/filter',

@@ -3,14 +3,13 @@ class PagesController < ApplicationController
   def dates_indisponible
 
     Reservation.unscoped.pluck(:debut, :fin).map do |range|
-      puts "-----------------------------"
-      puts range.inspect
+      range.inspect
     end
 
   end
   
   def index
-    puts @adresses = Location.distinct.pluck(:adresse)
+    @adresses = Location.distinct.pluck(:adresse)
     @locations = Location.includes(:images, :type).all.limit(8)
     @types = Type.where(etat: 1)
   end
@@ -26,19 +25,10 @@ class PagesController < ApplicationController
     @locations.each do |location|
       @reservations = Reservation.where(location_id: location.id).all
       dates_range = @reservations.map { |date| date.debut.strftime("%d-%m-%Y")..date.fin.strftime("%d-%m-%Y") }
-      puts"===================="
-      puts dates_range.inspect
-      puts"===================="
+      
       dates_range.each do |range|
-        puts "range"
-        puts range.inspect
-        puts "value"
-        puts params[:debut]
-        puts params[:fin]
-        puts range.include?(params[:debut])
         if range.include?(params[:debut]) || range.include?(params[:fin])
-          puts "inclus"
-          puts location.inspect
+          location.inspect
         end
       end
     end
@@ -63,7 +53,6 @@ class PagesController < ApplicationController
   def query
     add = Location.arel_table
     @adresses = Location.pluck(:adresse).where(add[:adresse].matches("%#{params[:query]}%")).all
-    puts @adresses.inspect
 
     if request.xhr?
       render :partial => 'query', locals: {:adresses => @adresses}

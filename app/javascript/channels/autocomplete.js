@@ -3,11 +3,9 @@ import autocomplete from 'js-autocomplete';
 
 
 const autocompleteSearch = function() {
-    console.log("Autocomplete");
     $(document).ready(function() {
 
         const adresses = JSON.parse(document.getElementById('search-data').dataset.adresses)
-        console.log(adresses);
         const searchInput = document.getElementById('query');
       
         if (adresses && searchInput) {

@@ -2,16 +2,10 @@
 const image = function() {
 
     $(document).ready(function() {
-    console.log('im');
     $('#imageContainer img').each(function (index) {
-        console.log('1+');
         if ($(this).attr('onclick') != null) {
-        console.log('yes');    
-            console.log('a');
             if ($(this).attr('onclick').indexOf("runThis()") == -1) {       
-                console.log('g');
                 $(this).click(function () {
-                    console.log('e');
                     $(this).attr('onclick');
                     var src = $(this).attr("src");
                     ShowLargeImage(src);
@@ -19,7 +13,6 @@ const image = function() {
             }
         }
         else {       
-            console.log('no');
             $(this).click(function () {                        
                 var src = $(this).attr("src");
                 ShowLargeImage(src);

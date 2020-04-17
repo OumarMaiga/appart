@@ -9,14 +9,12 @@ class Location < ApplicationRecord
 
   def dates_indisponible
     reservations.pluck(:debut, :fin).map do |range|
-      puts"=============="
-      puts range.inspect
       { from: range[0], to: range[1] }
     end
   end
 
   # Pagination
-  paginates_per(5)
+  paginates_per(8)
 
   # Url
   acts_as_url :titre, url_attribute: :slug

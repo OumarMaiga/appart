@@ -1,6 +1,5 @@
 const filtre = function() {
     $(document).ready(function() {
-        console.log("Filter");
         var slider = $("#the_slider").slider({
             range: true,
             min: 200,
