@@ -13,6 +13,9 @@ class Reservation < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
+  # Pagination
+  paginates_per(5)
+
   private
 
   def date_fin_after_date_debut

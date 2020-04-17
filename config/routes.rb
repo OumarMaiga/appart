@@ -33,9 +33,11 @@ Rails.application.routes.draw do
 
   get 'pages/query', to: 'pages#query'
 
-  get '/:adresse', to: 'pages#adresse', as: 'adresse'
+  get '/adresse/:adresse', to: 'pages#adresse', as: 'adresse'
 
   get '/:type/:adresse', to: 'pages#type_adresse', as: 'type_adresse'
+
+  get 'filter', to: 'locations#filter', as: 'filter'
 
   resources :notifications, only: [:index, :show]
 

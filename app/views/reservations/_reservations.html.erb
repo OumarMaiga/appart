@@ -1,0 +1,59 @@
+
+    <% @reservations.each do |reservation| %>
+    <div class="card md-3" id="appart">
+      <div class="row no-gutters">
+      <div class="col-md-4">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <% if reservation.location.images.present? %>
+              <div class="carousel-inner">
+                <% reservation.location.images.each do |image| %>
+                  <div class="carousel-item <%= "active" if image.id == reservation.location.images.first.id  %>">
+                    <a href="<%= reservation_path(reservation.slug) %>">
+                      <%= image_tag image.libelle_url, class: "d-block w-100", heigth: '90%', width: '250px' %>
+                    </a>
+                  </div>
+                <% end %>
+              </div>
+          <% else %>
+            <div class="carousel-item">
+              <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h3 class="card-title" id="titre">
+            <%= link_to reservation.location.titre, reservation_path(reservation.slug) %> 
+            <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= reservation.location.type.libelle %></span> 
+            <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= reservation.location.adresse %></small></p>
+          </h3>
+        <%= reservation.location.description %>
+        <hr>
+        <div class="row">
+          <div class="col-md-8">
+            <ul>
+              <li>
+                reservé au nom de <b><%= "#{reservation.nom} #{reservation.prenom}" %></b>
+              </li>
+              <% if !reservation.location.nombre_adulte.nil? || !reservation.location.nombre_enfant.nil? %>
+                <li>
+                  <b><%= "Adulte: #{reservation.nombre_adulte}  | " if !reservation.nombre_adulte.nil? %></b> <b><%= "Enfant: #{reservation.nombre_enfant}" if !reservation.nombre_enfant.nil? %></b>
+                </li>
+              <% end %>
+              <li>
+                Pour la date du <b><%= reservation.debut %></b> au <b><%= reservation.fin %></b>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <div class="row d-flex justify-content-end">              
+              <span class="badge badge-success float-md-right" style="font-size: 14px;"><%= reservation.location.prix %>F / <%= reservation.location.duree %></span> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <% end %>

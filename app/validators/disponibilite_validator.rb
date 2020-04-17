@@ -17,4 +17,4 @@ class DisponibiliteValidator < ActiveModel::EachValidator
             end
         end
     end
-  end
+end

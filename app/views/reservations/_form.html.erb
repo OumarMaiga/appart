@@ -1,6 +1,5 @@
-
       <%= form_for([@location, @reservation]) do |form| %>
-      <div class="modal-content">
+      <div class="modal-content card-body">
         <% if @reservation.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
@@ -13,43 +12,41 @@
           </div>
         <% end %>
 
-
-          <div class="field">
-            <%= form.label :debut %>
-            <%= form.date_field :debut %>
+        <div class="row">
+          <div class="col-md input-group form-group">
+            <%= form.text_field :nom, class: 'form-control', placeholder: 'Nom', value: current_user.nom if user_signed_in? %>
+            <%= form.text_field :nom, class: 'form-control', placeholder: 'Nom' unless user_signed_in? %>
           </div>
         
-          <div class="field">
-            <%= form.label :fin %>
-            <%= form.date_field :fin %>
+          <div class="col-md input-group form-group">
+            <%= form.text_field :prenom, class: 'form-control', placeholder: 'Prenom', value: current_user.prenom if user_signed_in? %>
+            <%= form.text_field :prenom, class: 'form-control', placeholder: 'Prenom' unless user_signed_in? %>
           </div>
+        </div>
           
-        <% unless user_signed_in? %>
-          <div class="field">
-            <%= form.label :email %>
-            <%= form.text_field :email %><br>
-            <span>Un mail de confirmation sera envoyez </span>
-          </div>
-        <% end %>
-          <!--<div class="field">
-            <%= form.label :nom %>
-            <%= form.text_field :nom, value: current_user.nom if user_signed_in? %>
-            <%= form.text_field :nom unless user_signed_in? %>
-          </div>
+        <div class="row">
+          <% unless user_signed_in? %>
+            <div class="col-md form-group">
+              <div>Un mail de confirmation vous sera envoyé </div>
+              <%= form.text_field :email, placeholder: 'Email', class: 'form-control' %>
+            </div>
+          <% end %>
         
-          <div class="field">
-            <%= form.label :prenom %>
-            <%= form.text_field :prenom, value: current_user.prenom if user_signed_in? %>
-            <%= form.text_field :prenom unless user_signed_in? %>
-          </div>-->
-        
-          <div class="field">
-            <%= form.label :telephone %>
-            <%= form.number_field :telephone, value: current_user.telephone if user_signed_in? %>
-            <%= form.number_field :telephone unless user_signed_in? %><br>
-            <span>Le numéro sur le quel vous êtes joingnable</span>
+          <div class="col-md form-group">
+          <div>Un numéro joingnable</div>
+            <%= form.number_field :telephone, class: 'form-control', placeholder: 'Telephone', value: current_user.telephone if user_signed_in? %>
+            <%= form.number_field :telephone, class: 'form-control', placeholder: 'Telephone' unless user_signed_in? %><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md input-group form-group">
+            <%= form.date_field :debut, class: 'form-control', placeholder: 'Debut' %>
           </div>
         
+          <div class="col-md input-group form-group">
+            <%= form.date_field :fin, class: 'form-control', placeholder: 'Fin' %>
+          </div>
+        </div>  
 
           <!--<div class="field">
             <%= form.label :nombre_adulte %>
@@ -66,7 +63,7 @@
             <%= form.text_field :montant_paye %>
           </div>-->
         </div>
-    <div class="modal-footer">
+    <div class="modal-footer card-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
       <%= form.submit 'Valider', :class => 'btn btn-warning' %>
     </div>

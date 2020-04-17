@@ -1,5 +1,7 @@
-<h1>New Type</h1>
-
-<%= render 'form', type: @type %>
-
-<%= link_to 'Back', types_path %>
+<div class="container">
+    <h1>Création de type</h1>
+    <div class="d-flex justify-content-center h-100">
+        <%= render 'form', location: @location %>
+        <!--<%= link_to 'Back', locations_path %>-->
+    </div>
+</div>

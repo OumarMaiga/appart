@@ -18,10 +18,12 @@ import { toggleDateInputs } from 'channels/reservation';
 import { autocompleteSearch } from 'channels/autocomplete';
 import { searchToggleDateInputs } from 'channels/recherche';
 import { image } from 'channels/image';
-import { filtre } from 'channels/filtre'
+import { filtre } from 'channels/filtre';
+import { filter } from 'channels/filter';
 
 toggleDateInputs();
 autocompleteSearch();
 searchToggleDateInputs();
 image();
 filtre();
+filter();

@@ -9,7 +9,7 @@ const autocompleteSearch = function() {
         const adresses = JSON.parse(document.getElementById('search-data').dataset.adresses)
         console.log(adresses);
         const searchInput = document.getElementById('query');
-        
+      
         if (adresses && searchInput) {
 
             new autocomplete({

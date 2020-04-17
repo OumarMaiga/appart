@@ -33,9 +33,10 @@
         </div>
         <div class="col-md-4 d-flex justify-content-end">
             <% if user_signed_in? %>
-                <%= link_to  "Deconnexion", destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' }, class: 'btn btn-primary' %>
+                <%= link_to  "Deconnexion", destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' }, class: 'btn btn-outline-warning btn_con' %>
             <% else %>
-                <%= link_to  "Inscription", new_user_registration_path, class: 'btn btn-outline-primary"' %> <%= link_to  "Connexion", new_user_session_path, class: 'btn btn-outline-primary"' %>
+                <%= link_to  "Inscription", new_user_registration_path, class: 'btn btn-outline-warning btn_con' %>
+                <%= link_to  "Connexion", new_user_session_path, class: 'btn btn-outline-warning btn_con' %>
             <% end %>
         </div>
 </div>

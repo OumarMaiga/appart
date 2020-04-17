@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.all.includes(:location).page params[:page]
   end
 
   # GET /reservations/1
@@ -29,11 +29,13 @@ class ReservationsController < ApplicationController
   def create
 
     @location = params[:location_id]
+    @location = Location.find_by(slug: params[:location_id])
+    @location_id = @location.id
 
     if user_signed_in?
-      @reservation = current_user.reservations.new(location_id: params[:location_id], email: current_user.email, nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], nombre_adulte: params[:reservation][:nombre_adulte], nombre_enfant: params[:reservation][:nombre_enfant], montant_paye: params[:reservation][:montant_paye])
+      @reservation = current_user.reservations.new(location_id: @location_id, email: current_user.email, telephone: params[:telephone], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], slug: params[:location_id])
     else
-      @reservation = Reservation.new(location_id: params[:location_id], email: params[:reservation][:email], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], nombre_adulte: params[:reservation][:nombre_adulte], nombre_enfant: params[:reservation][:nombre_enfant], montant_paye: params[:reservation][:montant_paye])
+      @reservation = Reservation.new(location_id: @location_id, email: params[:reservation][:email], telephone: params[:telephone], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], slug: params[:location_id])
     end
 
     respond_to do |format|
@@ -44,7 +46,7 @@ class ReservationsController < ApplicationController
           current_user.update(nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], telephone: params[:reservation][:telephone])
         end
 =end
-        format.html { redirect_to @reservation, notice: "Un mail de confirmation  vous sera envoyer a l'adresse #{@reservation.email}" }
+        format.html { redirect_to reservation_path(@reservation.slug), notice: "Un mail de confirmation  vous sera envoyer a l'adresse #{@reservation.email}" }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { redirect_to location_path(@location), alert: 'Reservation non effection.' }
@@ -78,7 +80,7 @@ class ReservationsController < ApplicationController
   end
 
   def my_reservation
-    @reservations = current_user.reservations.all
+    @reservations = Reservation.where(email: current_user.email)
   end
 
   def confirmer
@@ -92,7 +94,7 @@ class ReservationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
-      @reservation = Reservation.find(params[:id])
+      @reservation = Reservation.find_by_slug(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,114 +1,102 @@
-<%= simple_form_for(@location, local: true) do |form| %>
-  <% if location.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+    <div class="col-md-6">
+      <%= simple_form_for(@location, local: true) do |form| %>
+        <% if location.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
 
-      <ul>
-        <% location.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+            <ul>
+              <% location.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :titre %>
-    <%= form.text_field :titre %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.text_field :titre, class: "form-control", placeholder: 'Titre' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :adresse %>
-    <%= form.text_field :adresse %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.text_field :adresse, class: "form-control", placeholder: 'Adresse' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.text_area :description, class: "form-control", placeholder: 'Description' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :'Activer' %>
-    <%= form.check_box :etat %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.label :'Activer' %>
+          <%= form.check_box :etat, class: "form-control" %>
+        </div>
 
-  <div class="field">
-    <%= form.label :prix %>
-    <%= form.number_field :prix %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.number_field :prix, class: "form-control", placeholder: 'Prix' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :duree %>
-    <%= form.select :duree, [['Prix par...', nil], 'nuit', 'mois'] %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.select :duree, [['Prix par...', nil], 'nuit', 'mois'], class: "form-control" %>
+        </div>
 
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.select :type_id, Type.pluck(:libelle, :id) %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.label :type %>
+          <%= form.select :type_id, Type.pluck(:libelle, :id), class: "form-control" %>
+        </div>
 
-  <%= form.fields_for :images do |p| %>
-    <div class="field">
-      <%= form.label :images %>
-      <%= p.file_field :libelle, :multiple => true, name: "images[libelle][]" %>
-    </div>
-  <% end %>
+        <%= form.fields_for :images do |p| %>
+          <div class="input-group form-group">
+            <%= form.label :images %>
+            <%= p.file_field :libelle, class: "form-control", :multiple => true, name: "images[libelle][]" %>
+          </div>
+        <% end %>
+          
+        <div class="input-group form-group">
+          <%= form.association :caracteristiques, as: :check_boxes, label: "Caracteristique: ", class: "form-control", :label_method => lambda { |caracteristique| "#{caracteristique.libelle}" } %>
+        </div>
+      </div>
+      <div class="col-md-6">
 
-  <div class="field">
-    <%= form.label :'Nombre max d\'adulte' %>
-    <%= form.number_field :nombre_adulte %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.number_field :nombre_adulte, class: "form-control", placeholder: 'Nombre max d\'adulte' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :'Nombre max d\'enfant' %>
-    <%= form.number_field :nombre_enfant %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.number_field :nombre_enfant, class: "form-control", placeholder: 'Nombre max d\'enfant' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :nombre_salon %>
-    <%= form.number_field :nombre_salon %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.number_field :nombre_salon, class: "form-control", placeholder: 'Nombre de salon' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :nombre_chamber %>
-    <%= form.number_field :nombre_chamber %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.number_field :nombre_chamber, class: "form-control", placeholder: 'Nombre de chambre' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :nombre_toillete %>
-    <%= form.number_field :nombre_toillete %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.number_field :nombre_toillete, class: "form-control", placeholder: 'Nombre de toillet' %>
+        </div>  
 
-    
-  <div class="field">
-    <%= form.association :caracteristiques, as: :check_boxes, label: "Caracteristique: ", class: "form-control", :label_method => lambda { |caracteristique| "#{caracteristique.libelle}" } %>
-  </div>
-  
+        <div class="input-group form-group">
+          <%= form.text_field :nom_bailleur, class: "form-control", placeholder: 'Nom complet du bailleur' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :'Nom complet du bailleur', placeholder: 'Nom complet du bailleur' %>
-    <%= form.text_field :nom_bailleur %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.email_field :email_bailleur, class: "form-control", placeholder: 'Email du bailleur' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :email_bailleur %>
-    <%= form.email_field :email_bailleur, placeholder: 'Email du bailleur' %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.number_field :telephone_bailleur, class: "form-control", placeholder: 'Telephone du bailleur' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :telephone_bailleur %>
-    <%= form.number_field :telephone_bailleur, placeholder: 'Telephone du bailleur' %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.text_area :adresse_bailleur, class: "form-control", placeholder: 'Adresse du bailleur' %>
+        </div>
 
-  <div class="field">
-    <%= form.label :'Adresse du bailleur' %>
-    <%= form.text_area :adresse_bailleur, placeholder: 'Adresse du bailleur' %>
-  </div>
+        <div class="input-group form-group">
+          <%= form.hidden_field :user_id %>
+        </div>
 
-  <div class="field">
-    <%= form.hidden_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+        <div class="form-group">
+          <%= form.submit "Création", class: "btn login_btn"  %>
+        </div>
+      </div>
+    <% end %>

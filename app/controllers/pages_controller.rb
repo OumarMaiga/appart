@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   
   def index
     puts @adresses = Location.distinct.pluck(:adresse)
-    @locations = Location.includes(:images, :type).all.limit(6)
+    @locations = Location.includes(:images, :type).all.limit(8)
     @types = Type.where(etat: 1)
   end
 

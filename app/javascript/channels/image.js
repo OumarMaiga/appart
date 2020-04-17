@@ -5,7 +5,7 @@ const image = function() {
     console.log('im');
     $('#imageContainer img').each(function (index) {
         console.log('1+');
-        if ($(this).attr('onclick') != null) {   
+        if ($(this).attr('onclick') != null) {
         console.log('yes');    
             console.log('a');
             if ($(this).attr('onclick').indexOf("runThis()") == -1) {       

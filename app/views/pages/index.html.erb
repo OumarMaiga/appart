@@ -1,8 +1,35 @@
 <!-- Head -->
 <%= render 'pages/head' %>
 
+<!-- Type -->
+<section id="section_type" style="margin-top: 40px;">
+    <div class="container">
+        <h2 class="type">Type de location</h2>
+        <div class="row">
+            <div class="card-group">
+                <% @types.each do |type| %>
+                    <div class="col">
+                    <div class="card">
+                        <a href="<%= type_location_path(type.slug) %>">
+                            <%= image_tag type.image_url, class: "card-img-top", alt: type.libelle%>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= type.libelle %></h5>
+                            <p class="card-text"><%= Location.where(type: type.id).count %> <%= type.libelle %></p>
+                        </div>
+                    </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Location -->
+<%= render 'locations/locations' %>
+
 <!-- Par quartier --> 
-<section>
+<section  style="margin-top: 40px;">
     <div class="container">
         <h2 class="type">Location par adresse</h2>
         <div class="row" id="adresses">
@@ -26,52 +53,6 @@
                     </div>
                 <% end %>
             </div>
-        </div>
-    </div>
-</section>
-
-
-<!-- Location -->
-<%= render 'locations/locations' %>
-<!-- Type -->
-
-<section id="section_type">
-    <div class="container">
-        <h2 class="type">Type de location</h2>
-        <div class="row">
-
-                <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="card-group">
-                                <% @types.each do |type| %>
-                                    <div class="col">
-                                    <div class="card">
-                                        <a href="<%= type_location_path(type.slug) %>">
-                                            <%= image_tag type.image_url, class: "card-img-top", alt: type.libelle%>
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title"><%= type.libelle %></h5>
-                                            <p class="card-text"><%= Location.where(type: type.id).count %> <%= type.libelle %></p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                <% end %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-                </div>
-
         </div>
     </div>
 </section>
