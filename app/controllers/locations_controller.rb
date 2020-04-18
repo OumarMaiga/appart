@@ -43,7 +43,7 @@ class LocationsController < ApplicationController
           end
         end
 
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        format.html { redirect_to location_path(@location.slug), notice: 'Location créée avec succès.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -68,7 +68,7 @@ class LocationsController < ApplicationController
             @image = @location.images.create!(:libelle => a)
           end
         end
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+        format.html { redirect_to location_path(@location), notice: 'Location a bien été mise à jour.' }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -107,10 +107,10 @@ class LocationsController < ApplicationController
     # Locations par durée
     if !@nuit.nil? && !@mois.nil?
       if !@magasin.nil? && !@appartement.nil?
-        #puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 4)).includes(:images, :type)
-        puts @locations = Location.where("(duree = 'nuit' OR duree= 'mois') AND (type_id = 1 OR type_id = 4)").includes(:images, :type)
+        #puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
+        puts @locations = Location.where("(duree = 'nuit' OR duree= 'mois') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
       elsif !@magasin.nil?
-        puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 4).includes(:images, :type)
+        puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 2).includes(:images, :type)
       elsif !@appartement.nil?
         puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).includes(:images, :type)
       else
@@ -118,10 +118,10 @@ class LocationsController < ApplicationController
       end
     elsif !@nuit.nil?
       if !@magasin.nil? && !@appartement.nil?
-        #@locations = Location.where(duree: 'nuit').where(type: 1).or(Location.where(type_id: 4)).includes(:images, :type)
-        @locations = Location.where("(duree = 'nuit') AND (type_id = 1 OR type_id = 4)").includes(:images, :type)
+        #@locations = Location.where(duree: 'nuit').where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
+        @locations = Location.where("(duree = 'nuit') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
       elsif !@magasin.nil?
-        @locations = Location.where(duree: 'nuit').where(type: 4).includes(:images, :type)
+        @locations = Location.where(duree: 'nuit').where(type: 2).includes(:images, :type)
       elsif !@appartement.nil?
         @locations = Location.where(duree: 'nuit').where(type: 1).includes(:images, :type)
       else
@@ -130,11 +130,11 @@ class LocationsController < ApplicationController
 
     elsif !@mois.nil?
       if !@magasin.nil? && !@appartement.nil?
-        #@locations = Location.where(duree: 'mois').where(type: 1).or(Location.where(type_id: 4)).includes(:images, :type)
-        @locations = Location.where("(duree = 'mois') AND (type_id = 1 OR type_id = 4)").includes(:images, :type)
+        #@locations = Location.where(duree: 'mois').where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
+        @locations = Location.where("(duree = 'mois') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
 
       elsif !@magasin.nil?
-        puts @locations = Location.where(duree: 'mois').where(type: 4).includes(:images, :type)
+        puts @locations = Location.where(duree: 'mois').where(type: 2).includes(:images, :type)
       elsif !@appartement.nil?
         puts @locations = Location.where(duree: 'mois').where(type: 1).includes(:images, :type)
       else
@@ -143,10 +143,10 @@ class LocationsController < ApplicationController
 
     else
       if !@magasin.nil? && !@appartement.nil?
-        #@locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 4)).includes(:images, :type)
-        @locations = Location.where("(duree = 'nuit' OR duree= 'mois) AND (type_id = 1 OR type_id = 4)").includes(:images, :type)
+        #@locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
+        @locations = Location.where("(duree = 'nuit' OR duree= 'mois) AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
       elsif !@magasin.nil?
-        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 4).includes(:images, :type)
+        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 2).includes(:images, :type)
       elsif !@appartement.nil?
         @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).includes(:images, :type)
       else

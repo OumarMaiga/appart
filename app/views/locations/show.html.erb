@@ -18,7 +18,9 @@
         <% @images.each do |image| %>
             <%= image_tag(image.libelle_url, width: '160px', height: '150px') if image.libelle.present? %>
         <% end %>
-            <p><%= @location.description %></p>
+          <div class="show_ecrit">
+            <div class="description"><%= @location.description %></div>
+            <div class="caracteristique">
             <h5><%= "CARACTERISTIQUES" if @location.nombre_salon != nil || @location.nombre_chamber != nil || @location.nombre_toillete != nil %></h5>
                   <% if @location.nombre_salon != nil %>
                     Salon: <small><%= @location.nombre_salon %></small>
@@ -34,26 +36,29 @@
                   <br>
                   <% unless @location.caracteristiques.empty? %>
                     <% @location.caracteristiques.each do |caracteristique| %>
-                      <span><i class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
+                      <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
                     <% end %>
                   <% end %>
-
+              </div>
             <div class="float-md-right">
-            <b><span class="badge badge-success prix"><%= @location.prix %> Fcfa / <%= @location.duree %></span></b><br>
-            <!-- Réserver box modal -->
-            <button class="btn btn-warning modal-trigger" data-toggle="modal" data-target="#reserver" class="d-flex align-items-end justify-content-end">
-              Reserver
-            </button>
-            <p><b>Pour toutes informations<br> contactez-nous au (223 71 31 65 44)</b></p>
+              <b><span class="badge badge-success prix"><%= @location.prix %> Fcfa / <%= @location.duree %></span></b><br>
+              <!-- Réserver box modal -->
+              <button class="btn btn-warning modal-trigger" data-toggle="modal" data-target="#reserver" class="d-flex align-items-end justify-content-end">
+                Reserver
+              </button>
+              <p><b>Pour toutes informations<br> contactez-nous au (223 71 31 65 44)</b></p>
             </div>
 
                 <% if Admin? %>
-                  <h5>BAILLEUR</h5>
-                  Nom du bailleur: <small><%= @location.nom_bailleur %></small><br>
-                  Email: <small><%= @location.email_bailleur %></small><br>
-                  Telephone: <small><%= @location.telephone_bailleur %></small><br>
+                  <div class="bailleur">
+                    <h5>BAILLEUR</h5>
+                    <%= @location.nom_bailleur %> <br>
+                    <%= @location.email_bailleur %> <br>
+                    <%= @location.telephone_bailleur %> <br>
+                  </div>
                 <% end %>
-      </div>
+          </div>
+        </div>
       </div>
     </div>
 

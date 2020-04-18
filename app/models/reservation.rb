@@ -2,10 +2,9 @@ class Reservation < ApplicationRecord
   belongs_to :location
   belongs_to :user, optional: true
 
-  validates :debut, :fin, presence: true, disponibilite: true
+  validates :debut, :fin, presence: true, disponibilite: true, on: :create
   validate :date_fin_after_date_debut
-  
-  
+    
   #Enregistrement de la notification
   after_create do
     Notification.create!(reservation_id: Reservation.unscoped.last.id, vue: false, type_notification: "reservation")

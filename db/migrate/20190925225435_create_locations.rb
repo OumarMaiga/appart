@@ -2,6 +2,7 @@ class CreateLocations < ActiveRecord::Migration[6.0]
   def change
     create_table :locations do |t|
       t.string :titre
+      t.string :slug
       t.text :adresse
       t.text :description
       t.boolean :etat

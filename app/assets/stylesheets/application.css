@@ -18,6 +18,11 @@
 body{
     background-color: rgba(204, 204, 204, 0.164);
 }
+.info{
+    width: 40%;
+    margin-left: 50px;
+    margin-top: auto;
+}
 .navigateur{
     background-color: yellow;
     padding-right: 30px;

@@ -80,14 +80,14 @@ class ReservationsController < ApplicationController
   end
 
   def my_reservation
-    @reservations = Reservation.where(email: current_user.email)
+    @reservations = Reservation.where(email: current_user.email).all.page params[:page]
   end
 
   def confirmer
     @reservation.update(confirmer: :true)
     ReservationMailer.reservation_confirmer(@reservation).deliver_now
     respond_to do |format|
-      format.html { redirect_to @reservation, notice: "Un mail confirmation sera envoyé à #{@reservation.email}" }
+      format.html { redirect_to reservation_path(@reservation.slug), notice: "Un mail confirmation a été envoyé à #{@reservation.email}" }
     end
   end
 

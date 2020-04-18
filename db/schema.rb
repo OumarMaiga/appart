@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_225121) do
+ActiveRecord::Schema.define(version: 2020_03_14_031629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_225121) do
 
   create_table "locations", force: :cascade do |t|
     t.string "titre"
+    t.string "slug"
     t.text "adresse"
     t.text "description"
     t.boolean "etat"
@@ -58,7 +59,6 @@ ActiveRecord::Schema.define(version: 2020_04_16_225121) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "adresse_bailleur"
     t.text "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition"
-    t.string "slug"
     t.index ["type_id"], name: "index_locations_on_type_id"
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_225121) do
   create_table "reservations", force: :cascade do |t|
     t.bigint "location_id", null: false
     t.bigint "user_id"
+    t.string "slug"
     t.string "email"
     t.string "nom"
     t.string "prenom"
@@ -87,7 +88,6 @@ ActiveRecord::Schema.define(version: 2020_04_16_225121) do
     t.boolean "confirmer", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "slug"
     t.index ["location_id"], name: "index_reservations_on_location_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -95,11 +95,11 @@ ActiveRecord::Schema.define(version: 2020_04_16_225121) do
   create_table "types", force: :cascade do |t|
     t.string "libelle"
     t.boolean "etat"
+    t.string "image"
+    t.string "slug"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
-    t.string "slug"
     t.index ["user_id"], name: "index_types_on_user_id"
   end
 

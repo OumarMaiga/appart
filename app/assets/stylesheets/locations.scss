@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.type-title{
+    text-transform: capitalize;
+}
+
 .show-content{
     margin-top: 30px;
 }
@@ -27,7 +31,7 @@
     background-color: black;
     opacity: 0.6;
     top: 0px;
-    left: 0px;    
+    left: 0px;
  }
  .modal-img {
      opacity: 0;
@@ -42,7 +46,7 @@
      margin-top: -50%;
      background-color: white;
      padding: 5px;
-     width: 340px; /*just to give a viewable size */
+     width: 1140px; /*just to give a viewable size */
  }
  .noscroll {
      overflow: hidden;
@@ -78,7 +82,18 @@
     min-width: 8%;
     max-width: 20%;
 }
-
+.show_ecrit{
+    margin-top: 40px;
+    font-size: 16px;
+    
+}
+.caracteristique{
+    margin-top: 10px;
+}
+.bailleur{
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 10px;
+}
 .pagination{
     margin-top: 30px;
 }

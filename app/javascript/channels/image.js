@@ -20,18 +20,22 @@ const image = function() {
         }
     });
 
-    $('body').on('click', '.modal-overlay', function () {
+/*     $('body').on('click', '.modal-overlay', function () {
         $('.modal-overlay, .modal-img').remove();
         $('body').removeClass('noscroll');
-    });
+    }); */
 
     function ShowLargeImage(imagePath) {
-        $('body').append('<div class="modal-overlay"></div><div class="modal-img"><img src="' + imagePath.replace("small","large") + '" /></div>').addClass('noscroll');
+        $('.image_head img').attr('src', imagePath);
+    }
+
+/*     function ShowLargeImage(imagePath) {
+        $('body').append('<div class="modal-overlay"><div class="modal-img"><img src="' + imagePath.replace("small","large") + '" /></div></div>').addClass('noscroll');
         $('.modal-img').animate({
             opacity: 1
         },1000);
     }
-
+ */
 });
 };
 

@@ -1,10 +1,18 @@
-<!--<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 <%- if controller_name == 'pages' %>
-<h1>Type de  location</h1>
-<% else %>
-<h1>Locations</h1>
+<div class="container">
+  <h2 class="type-title">
+    <% if params[:type] && params[:adresse] %>
+      <%= "#{params[:type]} à #{params[:adresse]}" %>
+    <% elsif params[:adresse] %>
+      <%= params[:adresse] %>
+    <% elsif params[:query] %>
+      <%= params[:query] %>
+    <% end %>
+  </h2>
+</div>
 <% end %>
--->
+
 <% if Admin? %>
   <a href="<%= new_location_path %>"  style="margin-top: -30px" class="btn btn-outline-warning" id="btn_creation"> Créer une location</a>
 <% end %>
@@ -24,7 +32,7 @@
               <input type="checkbox" name="mois" id="mois" class="form-check-input">
               <label for="mois" class="form-check-label">Mois</label>
             </div>
-            <div style="margin-top:20px;">
+            <div style="margin-top: 20px;">
               <h4>Par Type</h4>
               <% Type.all.each do |type| %>
                 <div class="form-check form-check-inline">

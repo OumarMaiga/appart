@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   def dates_indisponible
 
     Reservation.unscoped.pluck(:debut, :fin).map do |range|
-      range.inspect
+
     end
 
   end
