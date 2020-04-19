@@ -28,11 +28,13 @@
             <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= reservation.location.type.libelle %></span> 
             <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= reservation.location.adresse %></small></p>
           </h3>
-        <%= reservation.location.description %>
         <hr>
         <div class="row">
           <div class="col-md-8">
-            <ul>
+            <ul class="description">
+              <li>
+                <%= reservation.location.description %>
+              </li>
               <li>
                 reservé au nom de <b><%= "#{reservation.nom} #{reservation.prenom}" %></b>
               </li>
@@ -42,7 +44,7 @@
                 </li>
               <% end %>
               <li>
-                Pour la date du <b><%= reservation.debut %></b> au <b><%= reservation.fin %></b>
+                Pour la date du <b id="date"><%= reservation.debut %></b> au <b id="date"><%= reservation.fin %></b>
               </li>
             </ul>
           </div>

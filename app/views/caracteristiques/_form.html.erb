@@ -11,17 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :libelle %>
-    <%= form.text_field :libelle %>
+  <div class="input-group form-group">
+    <%= form.text_field :libelle, placeholder: "Libelle", class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :icon %>
-    <%= form.text_field :icon %>
+  <div class="input-group form-group">
+    <%= form.text_field :icon, placeholder: "Icon", class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Création", class:"btn float-right login_btn"  %>
   </div>
 <% end %>

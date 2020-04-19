@@ -1,7 +1,15 @@
 <div class="container">
-    <h1>Création de type</h1>
     <div class="d-flex justify-content-center h-100">
-        <%= render 'form', location: @location %>
-        <!--<%= link_to 'Back', locations_path %>-->
+        <div class="card form">
+            <div class="card-header">
+                <h1>Création de type</h1>
+            </div>
+            <div class="card-body">
+                <%= render 'form', location: @location %>
+            </div>
+            <div class="card-footer">
+                <%= link_to 'Retour', locations_path %>
+            </div>
+        </div>
     </div>
 </div>

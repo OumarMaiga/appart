@@ -20,6 +20,7 @@ import { searchToggleDateInputs } from 'channels/recherche';
 import { image } from 'channels/image';
 import { filtre } from 'channels/filtre';
 import { filter } from 'channels/filter';
+import { info } from 'channels/information';
 
 toggleDateInputs();
 autocompleteSearch();
@@ -27,3 +28,4 @@ searchToggleDateInputs();
 image();
 filtre();
 filter();
+info();
