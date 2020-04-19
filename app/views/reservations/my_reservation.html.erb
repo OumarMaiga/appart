@@ -1,0 +1,8 @@
+<div class="container">
+  <h2>Mes reservations</h2>
+      <%= render 'reservations' %>
+      <div class="pagination">
+          <%= link_to_previous_page @reservations, '< Précédent', class: "btn btn-warning" %>
+          <%= link_to_next_page @reservations, 'Suivant >', class: "btn btn-warning" %>
+      </div>
+</div>

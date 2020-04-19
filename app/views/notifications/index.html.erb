@@ -1,0 +1,15 @@
+<div class="container">
+    <h3>Vos notifications</h3>
+    <hr>
+    <div class="list-group">
+        <% @notifications.each do |notification| %>
+        <% 
+            @reservartion = Reservation.find(notification.reservation_id) 
+            @slug = @reservartion.slug
+        %>
+            <a href="<%= reservation_path(@slug) %>" class="list-group-item">
+                <p><b><%= "#{notification.reservation.nom} #{notification.reservation.prenom}" %></b> viens de reserver un <%= notification.reservation.location.type.libelle %> <b><%= "#{notification.reservation.location.titre}"%></b> de <b><%= "#{notification.reservation.location.adresse}" %></b> pour la date du <b><%= notification.reservation.debut %></b> au <b><%= notification.reservation.fin %></b></p> 
+            </a>
+            <% end %>
+    </div>
+</div>

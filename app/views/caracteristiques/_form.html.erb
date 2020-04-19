@@ -1,0 +1,25 @@
+<%= form_with(model: caracteristique, local: true) do |form| %>
+  <% if caracteristique.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(caracteristique.errors.count, "error") %> prohibited this caracteristique from being saved:</h2>
+
+      <ul>
+        <% caracteristique.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-group form-group">
+    <%= form.text_field :libelle, placeholder: "Libelle", class: "form-control" %>
+  </div>
+
+  <div class="input-group form-group">
+    <%= form.text_field :icon, placeholder: "Icon", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Création", class:"btn float-right login_btn"  %>
+  </div>
+<% end %>

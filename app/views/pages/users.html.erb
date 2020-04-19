@@ -1,0 +1,28 @@
+<h1>Utilisateurs</h1>
+<div class="row">
+    <%= @users.count %> presonnes inscrit
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Nom et prenom</th>
+            <th>Adresse</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Nombre de reservation</th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+        <tr>
+            <td><%= "#{user.nom} #{user.prenom}" %></td>
+            <td><%= user.adresse %></td>
+            <td><%= user.email %></td>
+            <td><%= user.telephone %></td>
+            <td>Nombre de reservation</td>
+            <td><a href="<%= user_path(user.id) %>">Detail</a></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

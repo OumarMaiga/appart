@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card form">
+      <div class="card-header">
+        <h2>Modification de mot de passe</h2>
+      </div>
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <%= f.hidden_field :reset_password_token %>
+
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+            <% end %>
+            <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control", placeholder: "Nouveau mot de passe" %>
+          </div>
+
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Cofirmer nouveau mot de passe" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit "Modifier", class: "btn float-right login_btn" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <%= render "users/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

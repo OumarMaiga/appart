@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: one
+  user: one
+  nom: MyString
+  prenom: MyString
+  debut: 2019-10-02
+  fin: 2019-10-02
+  nombre_personne: 1
+  montant_paye: MyString
+
+two:
+  location: two
+  user: two
+  nom: MyString
+  prenom: MyString
+  debut: 2019-10-02
+  fin: 2019-10-02
+  nombre_personne: 1
+  montant_paye: MyString

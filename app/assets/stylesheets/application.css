@@ -1,0 +1,99 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+*/
+
+
+body{
+    background-color: rgba(204, 204, 204, 0.164);
+}
+.info{
+    width: 40%;
+    margin-left: 50px;
+    margin-top: auto;
+}
+.navigateur{
+    background-color: yellow;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-bottom: 40px;
+}
+.background{
+    background-image: url(bko-plane-view.jpg);
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+.layer{
+    background-color: rgba(251, 255, 0, 0.6);
+    position: absolute;
+    height: 400px;
+    width: 100%;
+    padding-top: 40px;
+    margin: auto;
+    padding: 20px;
+}
+
+
+.titre {
+    font-size: 62px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 48px;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.search{
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+}
+
+.description {
+    font-size: 14px;
+}
+
+.form {
+    margin-top: 30px;
+}
+
+.input-group-prepend span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+
+ .login_btn{
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}
+    
+.login_btn:hover{
+    color: black;
+    background-color: white;
+}
+.btn_con{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: auto;
+    margin-right: 10px;
+}
+#btn_creation{
+    margin-top: 10px;
+    margin-left: 20px;
+}

@@ -1,0 +1,30 @@
+
+<section>
+    <div class="container">
+        <div class="row">
+        <% @locations.each do |location| %>
+            <div class="col-md-3" id="appart">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <% if location.images.present? %>
+                    <div class="carousel-inner">
+                        <% location.images.each do |image| %>
+                        <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                            <a href="<%= location_path(location.slug) %>">
+                                <div class="" id="image" style="background-image: url(<%= image.libelle_url %>);">
+                                    <span class="badge badge-warning float-md-left" id="badge"><%= location.type.libelle %></span><span class="float-md-right text-center badge badge-success" id="badge"><%= location.prix %>f<br><%= location.duree %></span>
+                                </div>
+                            </a>
+                        </div>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <div class="carousel-item">
+                        <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
+                    </div>
+                <% end %>
+                </div>
+            </div>
+        <% end %>
+        </div>
+    </div>
+</section>

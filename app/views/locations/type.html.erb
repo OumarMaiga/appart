@@ -1,0 +1,68 @@
+<!-- Head -->
+<%= render 'pages/head' %>
+<!-- Locations -->
+<!--<%= render 'locations/locations' %>-->
+
+<!-- 3 Adresses par 3 Locations chacun -->
+
+<section style="margin-top: 40px;">
+    <div class="container">
+        <% @three_adresses.each do |adresse| %>
+        <!-- Recuperation de 3 locations par adresse  -->
+        <% 
+            @three_location_adresse = Location.where(adresse: adresse).where(type_id: @type.id).limit(3)
+        %>
+                <h4><%= @type.libelle %> à <%= adresse %></h4>
+            <div class="row" id="three-adresses">
+                <div class="card-group">
+                    <!-- Recuperation de l'image d'une adresse -->
+                    <%
+                        @three_location_adresse.each do |location| 
+                        @image = Image.where(location_id: location.id).first
+                    %>
+                    <div class="col">
+                        <div class="card">
+                            <a href="<%= location_path(location.slug) %>">
+                                <%= image_tag @image.libelle_url, class: "card-img-top", alt: location.titre %>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="<%= location_path(location.slug) %>">
+                                        <%= location.titre %>
+                                    </a>
+                                    <br>
+                                    <span class="float-md-left text-center badge badge-success" id="badge"><%= location.prix %>f / <%= location.duree %></span>
+                                    <br>
+                                </h5>
+                                <p class="card-text">
+                                    <%= location.description %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</section>
+
+<!-- Par quartier -->
+
+<section>
+    <div class="container">
+        <h4 class="type"><%= @type.libelle %> par adresse</h4>
+        <div class="row">
+                <% @adresses.each do |adresse| %>
+                <!-- Recuperation de l'image d'un adresse -->
+                <% 
+                    @location_adresse = Location.where(adresse: adresse).first
+                %>
+                        <a href="<%= type_adresse_path(@type.slug, adresse) %>" class="adresse-type">
+                                <%= adresse %><br>
+                                <%= Location.where(type_id: @type.id).where(adresse: adresse).count %> <%= @type.libelle %>s
+                        </a>
+                <% end %>
+        </div>
+    </div>
+</section>

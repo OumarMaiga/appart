@@ -1,0 +1,114 @@
+<!--<p id="notice"><%= notice %></p>-->
+<%- if controller_name == 'pages' %>
+<div class="container">
+  <h2 class="type-title">
+    <% if params[:type] && params[:adresse] %>
+      <%= "#{params[:type]} à #{params[:adresse]}" %>
+    <% elsif params[:adresse] %>
+      <%= params[:adresse] %>
+    <% elsif params[:query] %>
+      <%= params[:query] %>
+    <% end %>
+  </h2>
+</div>
+<% end %>
+
+<% if Admin? %>
+  <a href="<%= new_location_path %>"  style="margin-top: -30px" class="btn btn-outline-warning" id="btn_creation"> Créer une location</a>
+<% end %>
+<div class="container ">
+  <div class="row">
+  <%- unless controller_name == 'pages' %>
+    <div class="col-md-3">
+      <h3>Filtre la recherche</h3>
+      <div id="filter">
+        <form method="GET" action="/filter" class="filter">
+        <h4>Par durée</h4>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" name="nuit" id="nuit" class="form-check-input">
+              <label for="nuit" class="form-check-label">Nuit</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" name="mois" id="mois" class="form-check-input">
+              <label for="mois" class="form-check-label">Mois</label>
+            </div>
+            <div style="margin-top: 20px;">
+              <h4>Par Type</h4>
+              <% Type.all.each do |type| %>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" name="<%= type.libelle %>" id="<%= type.libelle %>" class="form-check-input">
+                  <label for="<%= type.libelle %>" class="form-check-label"><%= type.libelle %></label>
+                </div>
+              <% end %>
+            </div>
+        </form>
+      </div>
+    </div>
+    <% end %>
+
+    <%- if controller_name == 'pages' %>
+      <div class="col-md-12 appart_container">
+    <% else %>
+      <div class="col-md-9 appart_container">
+    <% end %>
+      <% @locations.each do |location| %>
+          <div class="card md-3" id="appart">
+            <div class="row no-gutters">
+            <div class="col-md-4">
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <% if location.images.present? %>
+                    <div class="carousel-inner">
+                      <% location.images.each do |image| %>
+                      <a href="<%= location_path(location.slug) %>">
+                        <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                          <%= image_tag image.libelle_url, class: "image" %>
+                        </div>
+                      </a>
+                      <% end %>
+                    </div>
+                <% else %>
+                  <div class="carousel-item">
+                    <%= image_tag 'maison.png', class: "image" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h3 class="card-title" id="titre">
+                  <%= link_to location.titre, location_path(location.slug) %> 
+                  <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= location.type.libelle %></span> 
+                  <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= location.adresse %></small></p>
+                </h3>
+                <hr>
+              <div class="row">
+                <div class="col-md-8">
+                  <ul class="description">
+                    <li>
+                      <%= location.description %>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-4">
+                  <div class="row d-flex justify-content-end">
+                    <span class="badge badge-success float-md-right" style="font-size: 14px;"><%= location.prix %>F / <%= location.duree %></span> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      <% end %>
+      <div class="pagination">
+          <%= link_to_previous_page @locations, '< Précédent', class: "btn btn-warning" %>
+          <%= link_to_next_page @locations, 'Suivant >', class: "btn btn-warning" %>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$( document ).ready(function() {
+$("#ex2").slider({});
+});
+</script>
