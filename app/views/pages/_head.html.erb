@@ -8,9 +8,9 @@
                         <%= form_tag(search_path, method: :get, class: 'form-inline') do %>
                             <div id="search-data" class="input-field search-bar" data-adresses="<%= @adresses.to_json %>">
                                     <%= text_field_tag :query, nil, autocomplete: 'off', placeholder: "Quartier..." %>
-                                    <%= date_field_tag :debut, "Date de debut" %>
+                                    <input type="text" id="debut" class="flatpickr-input" placeholder="Date de debut" name="debut" />
                                     -
-                                    <%= date_field_tag :fin, "Date de fin" %>
+                                    <input type="text" id="fin" class="flatpickr-input" placeholder="Date de fin" name="fin" />
                                     <!--<%= number_field_tag :nombre_personne %>-->
                                 <%= submit_tag 'Rechercher', :class => 'btn login_btn' %>
                             </div>
