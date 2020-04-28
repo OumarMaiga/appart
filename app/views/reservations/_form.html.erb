@@ -34,8 +34,8 @@
         
           <div class="col-md form-group">
           <div>Un numéro joingnable</div>
-            <%= form.number_field :telephone, class: 'form-control', placeholder: 'Telephone', value: current_user.telephone if user_signed_in? %>
-            <%= form.number_field :telephone, class: 'form-control', placeholder: 'Telephone' unless user_signed_in? %><br>
+            <%= form.text_field :telephone, class: 'form-control', placeholder: 'Telephone', value: current_user.telephone if user_signed_in? %>
+            <%= form.text_field :telephone, class: 'form-control', placeholder: 'Telephone' unless user_signed_in? %><br>
           </div>
         </div>
         <div class="row">
