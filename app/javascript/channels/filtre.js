@@ -12,6 +12,6 @@ const filtre = function() {
         });
         $("#locations_bas").val(slider.slider("values")[0]);
         $("#locations_haut").val(slider.slider("values")[1]); */
-    });
+  });
 };
 export { filtre };
