@@ -3,8 +3,8 @@ import autocomplete from 'js-autocomplete';
 
 
 const autocompleteSearch = function() {
-    $(document).ready(function() {
-
+    $(document).on('turbolinks:load', function() {
+        console.log('Autocomplete');
         const adresses = JSON.parse(document.getElementById('search-data').dataset.adresses)
         const searchInput = document.getElementById('query');
       

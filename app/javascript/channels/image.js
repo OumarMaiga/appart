@@ -1,7 +1,8 @@
 
 const image = function() {
 
-    $(document).ready(function() {
+    $(document).on('turbolinks:load', function() {
+        console.log('Image');
     $('#imageContainer img').each(function (index) {
         if ($(this).attr('onclick') != null) {
             if ($(this).attr('onclick').indexOf("runThis()") == -1) {       

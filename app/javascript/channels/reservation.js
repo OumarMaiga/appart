@@ -3,7 +3,8 @@ import flatpickr from 'flatpickr';
 
 
   const toggleDateInputs = function() {
-    $(document).ready(function() {
+    $(document).on('turbolinks:load', function() {
+        console.log('Reservation');
 
       const startDateInput = document.getElementById('reservation_debut');
       const endDateInput = document.getElementById('reservation_fin');

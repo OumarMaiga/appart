@@ -1,5 +1,7 @@
 const filter = function() {
-    $(document).ready( function() {
+    $(document).on('turbolinks:load', function() {
+        console.log('Filter');
+        
         $('input[type="checkbox"]').change(function() {
 
             $.ajax({

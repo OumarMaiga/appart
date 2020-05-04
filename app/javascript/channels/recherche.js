@@ -4,7 +4,8 @@ import flatpickr from 'flatpickr';
 
   const searchToggleDateInputs = function() {
 
-    $(document).ready(function() {
+    $(document).on('turbolinks:load', function() {
+      console.log('Recherche');
 
       const startDateInput = document.getElementById('debut');
       const endDateInput = document.getElementById('fin');

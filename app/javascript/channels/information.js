@@ -1,5 +1,6 @@
 const info = function() {
-    $(document).ready(function () {
+    $(document).on('turbolinks:load', function() {
+        console.log('Info');
         $('.info').fadeOut(5000);
     })
 }

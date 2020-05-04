@@ -22,10 +22,10 @@ import { filtre } from 'channels/filtre';
 import { filter } from 'channels/filter';
 import { info } from 'channels/information';
 
-toggleDateInputs();
-autocompleteSearch();
-searchToggleDateInputs();
-image();
-filtre();
-filter();
 info();
+filter();
+filtre();
+image();
+searchToggleDateInputs();
+autocompleteSearch();
+toggleDateInputs();
