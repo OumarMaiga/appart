@@ -30,7 +30,7 @@ body{
     margin-bottom: 40px;
 }
 .background{
-    background-image: url(bko-plane-view.jpg);
+    background-image: url(https://appartml.s3.us-east-2.amazonaws.com/bko-plane-view.jpg);
     position: relative;
     height: 400px;
     width: 100%;

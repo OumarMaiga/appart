@@ -70,3 +70,5 @@ gem 'kaminari', '~> 0.16.3'
 
 # Remplace id by slug in url 
 gem 'stringex', '~> 2.6'
+
+gem 'fog', '~> 1.38'
