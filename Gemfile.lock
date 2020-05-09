@@ -266,7 +266,6 @@ GEM
     ipaddress (0.8.3)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
-    jmespath (1.4.0)
     json (2.3.0)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -428,7 +427,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk-s3
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
