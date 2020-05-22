@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   
   def index
     @adresses = Location.distinct.pluck(:adresse)
-    @locations = Location.includes(:images, :type).all.limit(8)
+    @locations = Location.includes(:images, :type).all.limit(4)
     @types = Type.where(etat: 1)
   end
 

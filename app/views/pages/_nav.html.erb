@@ -1,42 +1,51 @@
-<div class="row navigateur">
-        <div class="col-md-4">
-            <a class="navbar-brand" href="/">APPART</a>
-        </div>
-        <div class="col-md-4">
-            <ul class="nav d-flex justify-content-center">
-                <li class="nav-item">
-                    <%= link_to "Locations", locations_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">A propos</a>
-                </li>
-                <% if user_signed_in? %>
-                    <% if Admin? %>
+<nav class="navbar navbar-expand-lg navigation">
+    <!-- Brand -->
+        <a class="navbar-brand" href="/">APPART</a>
+          <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fas fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <%= link_to "Locations", locations_path, class: "nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">A propos</a>
+                    </li>
+                    <% if user_signed_in? %>
+                        <% if Admin? %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<%= notifications_path %>">
+                                    Notifications <span class="badge badge-danger"><%= notification_non_vue.to_s %></span>
+                                </a>
+                            </li>
+                            <li class="nav-item"> 
+                                <%= link_to "Les reservations", reservations_path, class: "nav-link" %>
+                            </li>
+                            <li class="nav-item"> 
+                                <%= link_to "Users", users_path, class: "nav-link" %>
+                            </li>
+                        <% else %>
+                            <li class="nav-item">
+                                <%= link_to "Mes reservations", my_reservation_reservations_path, class: "nav-link" %>
+                            </li>
+                        <% end %>
+                    <% end %>
+                </ul>
+                <ul class=" navbar-nav navbar-right">
+                    <% if user_signed_in? %>
                         <li class="nav-item">
-                            <a class="nav-link" href="<%= notifications_path %>">
-                                Notifications <span class="badge badge-danger"><%= notification_non_vue.to_s %></span>
-                            </a>
-                        </li>
-                        <li class="nav-item"> 
-                            <%= link_to "Les reservations", reservations_path, class: "nav-link" %>
-                        </li>
-                        <li class="nav-item"> 
-                            <%= link_to "Users", users_path, class: "nav-link" %>
+                            <%= link_to  "Deconnexion", destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' }, class: 'btn btn-outline-warning btn_con nav-link', type: "button" %>
                         </li>
                     <% else %>
                         <li class="nav-item">
-                            <%= link_to "Mes reservations", my_reservation_reservations_path, class: "nav-link" %>
+                            <%= link_to  "Inscription", new_user_registration_path, class: 'btn btn-outline-warning btn-md btn_con nav-link', type: "button" %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to  "Connexion", new_user_session_path, class: 'btn btn-outline-warning btn-md btn_con nav-link', type: "button" %>
                         </li>
                     <% end %>
-                <% end %>
-            </ul>
+                </ul>
         </div>
-        <div class="col-md-4 d-flex justify-content-end">
-            <% if user_signed_in? %>
-                <%= link_to  "Deconnexion", destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' }, class: 'btn btn-outline-warning btn_con' %>
-            <% else %>
-                <%= link_to  "Inscription", new_user_registration_path, class: 'btn btn-outline-warning btn_con' %>
-                <%= link_to  "Connexion", new_user_session_path, class: 'btn btn-outline-warning btn_con' %>
-            <% end %>
-        </div>
-</div>
+</nav>

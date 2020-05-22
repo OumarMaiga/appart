@@ -9,6 +9,10 @@
     margin-bottom: 20px;
  }
 
+ #type-image{
+    height: 200px;
+}
+
 #image{
     width: 100%;
     height: 200px;
@@ -18,7 +22,7 @@
 #badge{
     font-size: 14px;
 }
-.type{
+.title{
     padding: 1%;
     font-weight: bold;
     
@@ -28,9 +32,8 @@
     margin: 5%;
     padding-bottom: 20px;
 }
-#card-adresse{
-    margin-bottom: 7px;
-}
+
+
 
 #adresses{
     margin-bottom: 45px;

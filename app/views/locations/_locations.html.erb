@@ -1,9 +1,10 @@
 
 <section>
     <div class="container">
+        <h2 class="title">Locations préférées des clients</h2>
         <div class="row">
         <% @locations.each do |location| %>
-            <div class="col-md-3" id="appart">
+            <div class="col-md-3">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <% if location.images.present? %>
                     <div class="carousel-inner">
