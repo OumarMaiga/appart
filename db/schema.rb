@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_031629) do
     t.bigint "telephone"
     t.string "image"
     t.string "categorie"
+    t.boolean "etat", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

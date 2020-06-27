@@ -1,0 +1,105 @@
+<% content_for :dashboard_content do %>
+<section class="dashboard-form">
+    <%= form_for @admin, url: create_admin_path, :html => {class: "dashboard-form-content"}  do |form| %>
+        <div class="container">
+            <% unless params[:email] %>
+                <h3>Création d'une administrateur</h3>
+            <% else %>
+                <h3>Modification de l'administrateur</h3>
+            <% end %>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :nom, placeholder: "NOM", class: "form-control" %>
+                    </div>
+                    <div class="input-group form-group">
+                        <%= form.text_field :prenom, placeholder: "PRENOM", class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :telephone, placeholder: "TELEPHONE", class: "form-control" %>
+                    </div>
+                    <div class="input-group form-group">
+                        <%= form.text_field :adresse, placeholder: "ADRESSE", class: "form-control" %>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.email_field :email, placeholder: "Email", class: "form-control" %>
+                    </div>
+                    <% unless params[:email] %>
+                        <div class="input-group form-group">
+                            <%= form.text_field :password, placeholder: "PASSWORD", class: "form-control" %>
+                        </div>
+                    <% else %>
+                        <div class="input-group form-group">
+                            <input type="text" placeholder= "***************" class="form-control" readonly/>
+                        </div>
+                    <% end %>
+                </div>
+                <input type="hidden" name="email" value="<%=params[:email]%>" />
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <span class="input-group-text">Image</span>
+                        <%= form.file_field :image, class: "form-control" %>
+                    </div>
+                    <div class="input-group form-group">
+                        <span class="input-group-text">Categorie</span>
+                        <%= form.select :categorie, ['Administrateur'], {}, {class: "form-control"} %>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <% unless params[:email] %>
+                        <input type="submit" value="Créer" class= "btn btn-outline-warning">
+                    <% else %>
+                        <input type="submit" value="Modifier" class= "btn btn-outline-warning" %>
+                    <% end %>
+                </div>
+                
+            </div>
+        </div>
+    <% end %>
+</section>
+<section class="dashboard-tableau">
+    <h2>Liste des Administrateurs</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Nom Prenom</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Adresse</th>
+            <th>Action</th>
+        </thead>
+        <% @admins.each do |admin| %>
+            <tr>
+                <td><%= "#{admin.nom} #{admin.prenom}" %></td>
+                <td><%= admin.email %></td>
+                <td><%= admin.telephone %></td>
+                <td><%= admin.adresse %></td>
+                <td>
+                    <% if admin.etat == true %>
+                        <span class="badge badge-success">
+                            <%= link_to "Activer", change_state_admin_path(admin.email), method: :put %>
+                        </span>
+                    <% else %>
+                        <span class="badge badge-danger">
+                            <%= link_to "Desactiver", change_state_admin_path(admin.email), method: :put %>
+                        </span>
+                    <% end %>
+                    
+                    <%= link_to "Supp", delete_admin_path(admin.email), method: :DELETE %>
+
+                    <%= link_to "Modif", edit_admin_path(admin.email) %>
+
+                    <%= link_to "Detail", profil_path(admin.email) %>
+                    
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</section>
+<% end %>
+
+<%= render template: 'pages/dashboard' %>

@@ -1,31 +1,44 @@
 
 <section>
-    <div class="container">
-        <h2 class="title">Locations préférées des clients</h2>
-        <div class="row">
-        <% @locations.each do |location| %>
-            <div class="col-md-3">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <% if location.images.present? %>
-                    <div class="carousel-inner">
-                        <% location.images.each do |image| %>
-                        <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
-                            <a href="<%= location_path(location.slug) %>">
-                                <div class="" id="image" style="background-image: url(<%= image.libelle_url %>);">
-                                    <span class="badge badge-warning float-md-left" id="badge"><%= location.type.libelle %></span><span class="float-md-right text-center badge badge-success" id="badge"><%= location.prix %>f<br><%= location.duree %></span>
-                                </div>
-                            </a>
+    <h2 class="title text-center">Locations préférées des clients</h2>
+        <p class="text-location-bar"></p>
+        <p class="text-location">
+            Quelque locations très recommandée par nos fidèles utilisateurs
+        </p>
+    <div class="row">
+        <div class=col-12>
+            <div class="card-group">
+                <% @locations.each do |location| %>
+                    <div class="col-6 col-md-4">
+                        <div class="card location-item-content">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <% if location.images.present? %>
+                                    <div class="carousel-inner">
+                                        <% location.images.each do |image| %>
+                                            <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                                                <a href="<%= location_path(location.slug) %>">
+                                                    <%= image_tag image.libelle_url, class: "card-img-top location-item-image" %> 
+                                                </a>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                <% else %>
+                                    <div class="carousel-item">
+                                        <a href="<%= location_path(location.slug) %>">
+                                            <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
+                                        </a>
+                                    </div>
+                                <% end %>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="location-item-title"><%= link_to location.titre, location_path(location.slug) %><span class="badge badge-warning float-md-right" id="badge"><%= location.type.libelle %></span><h6>
+                                <p class="location-item-adresse"><small class="text-muted"><i class="fas fa-map-marker-alt"></i> <%= location.adresse %></small></p>
+                                <p class="location-item-price"><span class="badge badge-success"><%= location.prix %>f / <%= location.duree %></span></p>                                                    
+                            </div>
                         </div>
-                        <% end %>
-                    </div>
-                <% else %>
-                    <div class="carousel-item">
-                        <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
                     </div>
                 <% end %>
-                </div>
             </div>
-        <% end %>
         </div>
     </div>
 </section>

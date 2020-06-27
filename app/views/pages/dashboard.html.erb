@@ -1,0 +1,114 @@
+    <% content_for :dashboard do %>
+    <!--Sidebar-->
+        <div class="col-lg-2 col-md-3 d-none d-md-block">
+            <div class="dashboard-sidebar">
+                <a class="navbar-brand" href="/dashboards">Tableau de board</a>
+                <nav class="dashboard-sidebar-nav">
+                    <ul class="nav navbar-nav dashboard-side-item"> 
+                        <% if Super_admin? %>
+                            <li class="nav-item">
+                                <a href="/dashboards/administrateurs" class="nav-link">Administrateur</a>
+                            </li>
+                        <% end %>
+                        <li class="nav-item">
+                            <a href="/dashboards/utilisateurs" class="nav-link">Utilisateur</a>
+                        </li>
+                        <% if Super_admin? %>
+                            <li class="nav-item">
+                                <a href="/dashboards/types" class="nav-link">Type</a>
+                            </li>
+                        <% end %>
+                        <li class="nav-item">
+                            <a href="/dashboards/locations" class="nav-link">Location</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/dashboards/reservations" class="nav-link">Reservation</a>
+                        </li>
+                        <% if Super_admin? %>
+                            <li class="nav-item">
+                                <a href="/dashboards/caracteristiques" class="nav-link">Caracteristique</a>
+                            </li>
+                        <% end %>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+    <!-- Navigation -->
+        <div class="col-lg-10 col-md-9 col-sm-12 offset-md-3 offset-lg-2">
+            <nav role="navigation" class="navbar  navbar-expand-lg dashborad-navigation fixed-top">
+                <a class="navbar-brand" href="/">APPART</a>
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navDashboard" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navDashboard">
+                    <ul class="nav navbar-nav">
+                        <form method="GET" class="form-inline">
+                            <input type="search" placeholder="Search" name="search" id="search" class="form-control" />
+                        </form>
+                        <li class="nav-item">
+                            <span class="nav-link">13 Juin - 10:43</span>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link"><span class="fas fa-bell dashboard-icon"></span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="profil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nom Admin</a>
+                            <div class="dropdown-menu" arial-labelledby="profil" data-target="#profil">
+                                <a class="dropdown-item" href="#">Profil</a>
+                                <a class="dropdown-item" href="#">Autre</a>
+                                <a class="dropdown-item" href="#">Deconnecter</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <!--Body-->
+    <div class="col-lg-10 col-md-9 offset-md-3 offset-lg-2 contenu">
+    <!-- Sidebar-Navigation Petit ecran -->
+        <div class="d-sm-block d-md-none">
+            <nav role="navigation" class="navbar dashborad-sidebar-navigation">
+                <a class="navbar-brand" href="/dashboards">Tableau de board</a>
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#dashborad-sidebar-navigation" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="dashborad-sidebar-navigation">
+                <nav class="dashboard-sidebar-nav">
+                    <ul class="nav navbar-nav dashboard-side-item"> 
+                    <% if Super_admin? %>
+                        <li class="nav-item">
+                            <a href="/dashboards/administrateurs" class="nav-link">Administrateur</a>
+                        </li>
+                    <% end %>
+                        <li class="nav-item">
+                            <a href="/dashboards/utilisateurs" class="nav-link">Utilisateur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/dashboards/types" class="nav-link">Type</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/dashboards/locations" class="nav-link">Location</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/dashboards/reservations" class="nav-link">Reservation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/dashboards/caracteristiques" class="nav-link">Caracteristique</a>
+                        </li>
+                    </ul>
+                </nav>
+                </div>
+            </nav>
+        </div>
+        <div class="dashboard-container">
+            <% if content_for?(:dashboard_content) %>
+                <%= yield :dashboard_content %>
+            <% end %>
+        </div>
+    </div>
+
+    <% end %>

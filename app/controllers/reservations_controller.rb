@@ -33,9 +33,9 @@ class ReservationsController < ApplicationController
     @location_id = @location.id
 
     if user_signed_in?
-      @reservation = current_user.reservations.new(location_id: @location_id, email: current_user.email, telephone: params[:telephone], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], slug: params[:location_id])
+      @reservation = current_user.reservations.new(location_id: @location_id, email: current_user.email, telephone: params[:reservation][:telephone], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], slug: params[:location_id])
     else
-      @reservation = Reservation.new(location_id: @location_id, email: params[:reservation][:email], telephone: params[:telephone], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], slug: params[:location_id])
+      @reservation = Reservation.new(location_id: @location_id, email: params[:reservation][:email], telephone: params[:reservation][:telephone], nom: params[:reservation][:nom], prenom: params[:reservation][:prenom], debut: params[:reservation][:debut], fin: params[:reservation][:fin], slug: params[:location_id])
     end
 
     respond_to do |format|

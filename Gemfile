@@ -56,11 +56,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Authentification
 gem 'devise', '~> 4.7', '>= 4.7.1'
 
-# Upload de photo
-gem 'carrierwave', '~> 2.0', '>= 2.0.2'
-
 # Redimentionnement de l'image
 gem 'mini_magick', '~> 4.9', '>= 4.9.5'
+
+# Upload de photo
+gem 'carrierwave', '~> 2.0', '>= 2.0.2'
 
 #Simple Form
 gem 'simple_form'

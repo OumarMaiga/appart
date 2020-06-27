@@ -1,0 +1,46 @@
+<% content_for :dashboard_content do %>
+
+<section>
+    <div class="jumbotron">
+        <h1 class="display-4">56</h1>
+        <div class="lead">Locations reservées aujourd'hui</div>
+    </div>
+</section>
+
+<section class="dashboard-tableau">
+    <h2>Liste des reservations</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Titre de la location</th>
+            <th>Nom & Prenom</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Date de debut et fin</th>
+            <th>Action</th>
+        </thead>
+        <% @reservations.each do |reservation| %>
+            <tr>
+                <td><%= reservation.location.titre %></td>
+                <td><%= "#{reservation.nom} #{reservation.prenom}" %></td>
+                <td><%= reservation.email %></td>
+                <td><%= reservation.telephone %></td>
+                <td><%= "#{reservation.debut} - #{reservation.fin}" %></td>
+                <td>
+                    <% if reservation.confirmer == true %>
+                        <span class="badge badge-success">
+                            Confirmer
+                        </span>
+                    <% else %>
+                        <span class="badge badge-danger">
+                            <%= link_to "Non confirmer", confirmer_path(reservation.slug) %>
+                        </span>
+                    <% end %>
+                    <%= link_to  "Detail", show_reservation_path(reservation.slug) %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</section>
+<% end %>
+
+<%= render template: 'pages/dashboard' %>

@@ -1,0 +1,97 @@
+// Place all the styles related to the Dashboards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.dashboard-sidebar{
+    position: fixed;
+    padding: 25px;
+    padding-top: 20px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.dashboard-side-item {
+    font-size: 16px;
+    line-height: 22px
+}
+
+.dashborad-navigation {
+    top: 0;
+    left: 220px;
+    background-color: yellow;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.dashboard-icon {
+    font-size: 16px;
+}
+
+.dashboard-container {
+    margin-top: 90px;
+}
+
+.user-connecte {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.dashborad-sidebar-navigation {
+    top: 55px;
+    left: 0;
+    right: 0;
+    background-color: rgb(231, 231, 231);
+}
+
+.dashboard-form {
+    margin: 50px
+}
+
+.dashboard-form-content {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.76);
+    border-radius: 10px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.116), 0 6px 20px 0 rgba(0, 0, 0, 0.082);
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+.input-group-text {
+    padding-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .user-connecte {
+        margin-left: 25px;
+    }
+    .dashboard-form {
+        margin: 0;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    .dashboard-container {
+        margin-left: 27px
+    }
+}
+
+  @media (max-width: 576px) {
+    .user-connecte {
+        margin-left: 0;
+    }
+    .dashboard-container {
+        margin-left: 0
+    }
+    .dashborad-navigation {
+        top: 0;
+        left: 0;
+    }
+}

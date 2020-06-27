@@ -9,7 +9,7 @@
                 <% reservation.location.images.each do |image| %>
                   <div class="carousel-item <%= "active" if image.id == reservation.location.images.first.id  %>">
                     <a href="<%= reservation_path(reservation.slug) %>">
-                      <%= image_tag image.libelle_url, class: "d-block w-100", heigth: '90%', width: '250px' %>
+                      <%= image_tag image.libelle_url, class: "reservation-item-image" %>
                     </a>
                   </div>
                 <% end %>

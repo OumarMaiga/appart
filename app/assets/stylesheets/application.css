@@ -18,23 +18,28 @@
 body{
     background-color: rgba(204, 204, 204, 0.164);
 }
+
 .info{
     width: 40%;
     margin-left: 50px;
     margin-top: auto;
 }
+
 .navigation{
     background-color: yellow;
     padding-right: 30px;
-    padding-left: 30px;
-    margin-bottom: 40px;
+    padding-left: 30px;   
+    padding-top: 0;
+    padding-bottom: 0;
 }
+
 .background{
     background-image: url(https://appartml.s3.us-east-2.amazonaws.com/bko-plane-view.jpg);
     position: relative;
     height: 400px;
     width: 100%;
 }
+
 .layer{
     background-color: rgba(251, 255, 0, 0.6);
     position: absolute;
@@ -43,23 +48,6 @@ body{
     padding-top: 40px;
     margin: auto;
     padding: 20px;
-}
-
-
-.titre {
-    font-size: 62px;
-    font-weight: bold;
-    text-align: center;
-    font-size: 48px;
-    margin-top: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-
-.search{
-    display: flex;
-    margin-top: 100px;
-    justify-content: center;
 }
 
 .description {
@@ -98,3 +86,11 @@ body{
     margin-top: 10px;
     margin-left: 20px;
 }
+
+@media (max-width: 768px) {  
+    .titre {
+        font-size: 2rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+  }

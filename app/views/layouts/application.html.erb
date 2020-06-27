@@ -8,7 +8,9 @@
     <%= csp_meta_tag %>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+    crossorigin="anonymous">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -36,8 +38,6 @@
   </head>
 
   <body>
-    <!--Bar de navigation-->
-        <%= render template: 'pages/_nav' %>
         <% if notice || alert %>
           <div class="info">
             <% if notice %>
@@ -58,7 +58,13 @@
             <% end %>
           </div>
         <% end %>
+
+      <% unless content_for?(:dashboard_content) %>
+        <%= render template: 'pages/_nav' %>
+      <% end %>
       <%= yield %>
+
+      <%= yield :dashboard %>
       <!-- Footer -->
       <%= render template: 'pages/_foot' %>
   </body>

@@ -1,0 +1,42 @@
+<div class="card profil-content">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <%= image_tag @user.image_url, class: "card-img profil-image", alt: "..." if @user.image.present? %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= "#{@user.nom} #{@user.prenom}" %></h5>
+        <div class="row">
+            <div class="col-sm-3 profil-title">Adresse</div>
+            <div class="col-sm-9"><%= @user.adresse %></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 profil-title">Email</div>
+            <div class="col-sm-9">@user.email</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 profil-title">Telephone</div>
+            <div class="col-sm-9"><%= @user.telephone %></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 profil-title">Categorie</div>
+            <div class="col-sm-9"><%= @user.categorie %></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 profil-title">Etat</div>
+            <div class="col-sm-9">
+                <% if @user.etat == true %>
+                    <span class="badge badge-success">
+                        Activer
+                    </span>
+                <% else %>
+                    <span class="badge badge-danger">
+                        Desactiver
+                    </span>
+                <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

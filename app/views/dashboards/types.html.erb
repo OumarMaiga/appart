@@ -1,0 +1,80 @@
+<% content_for :dashboard_content do %>
+<section class="dashboard-form">
+    <%= form_for @type, url: create_type_path, html: {class: "dashboard-form-content"} do |form| %>
+      <div class="container">
+            <% unless params[:slug] %>
+                <h3>Création d'un type</h3>
+            <% else %>
+                <h3>Modification du type</h3>
+            <% end %>
+        <div class="row">
+          <% if @type.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@type.errors.count, "error") %> prohibited this type from being saved:</h2>
+
+              <ul>
+                <% @type.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="input-group form-group">
+            <%= form.text_field :libelle, class: "form-control", placeholder: 'Libelle' %>
+          </div>
+
+          <div class="input-group form-group">
+            <%= form.label :etat, class: "input-group-text" %>
+            <%= form.check_box :etat, class: "form-control" %>
+          </div>
+
+          <div class="input-group form-group">
+            <%= form.label :image, class: "input-group-text" %>
+            <%= form.file_field :image, class: "form-control" %>
+          </div>
+
+          <div class="input-group form-group">
+            <%= form.hidden_field :user_id %>
+                <input type="hidden" name="slug" value="<%=params[:slug]%>" />
+          </div>
+
+          <div class="form-group">
+            <% unless params[:slug] %>
+              <%= form.submit "Création", class: "btn btn-outline-warning" %>
+            <% else %>
+              <%= form.submit "Modifier", class: "btn btn-outline-warning" %>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+</section>
+
+<section class="dashboard-tableau">
+    <h2>Liste des types</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Libelle</th>
+            <th>Etat</th>
+            <th>Action</th>
+        </thead>
+        <% @types.each do |type| %>
+            <tr>
+                <td><%= type.libelle %></td>
+                <td><%= type.etat %></td>
+                <td>
+                    <%= link_to  "Supp", delete_type_path(type.slug), method: :DELETE %>
+
+                    <%= link_to  "Modif", edit_type_path(type.slug) %>
+                  
+                    <%= link_to  "Detail", show_type_path(type.slug) %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</section>
+<% end %>
+
+<%= render template: 'pages/dashboard' %>

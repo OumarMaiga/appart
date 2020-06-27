@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row show-content">
-    <div class="col-md-3">
+    <div class="col-md-3 d-none d-md-block">
       <%= render 'pages/search' %>
     </div>
     <div class="col-md-9">
@@ -9,37 +9,46 @@
         <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= @location.type.libelle %></span> 
         <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= @location.adresse %></small></p>
       </h3>
-      <div id="imageContainer">
-      <div class="image_head">
-          <%= image_tag(@image_last.libelle_url, class: 'image-large') if @image_last.present? %>
-      </div>
-      <div>
-        <% @images.each do |image| %>
-            <%= image_tag(image.libelle_url, class: 'image-small') if image.libelle.present? %>
-        <% end %>
-          <div class="show-ecrit">
-            <div class="description"><%= @location.description %></div>
-            <div class="caracteristique">
-            <h5><%= "CARACTERISTIQUES" if @location.nombre_salon != nil || @location.nombre_chamber != nil || @location.nombre_toillete != nil %></h5>
-                  <% if @location.nombre_salon != nil %>
-                    Salon: <small><%= @location.nombre_salon %></small>
-                  <% end %>
+        <div class="image_head">
+            <%= image_tag(@image_last.libelle_url, class: 'image-large') if @image_last.present? %>
+        </div>
+        <div>
+          <% @images.each do |image| %>
+              <%= image_tag(image.libelle_url, class: 'image-small') if image.libelle.present? %>
+          <% end %>
+        </div>
+      <div class="show-ecrit">
+        <div class="description">
+          <%= @location.description %>
+        </div>
+        <div class="row show-location-content" >
+          <div class="col-md-8">
+            <h6>
+              <u>
+                <%= "Caracteristiques:" if @location.nombre_salon != nil || @location.nombre_chamber != nil || @location.nombre_toillete != nil %>
+              </u>
+            </h6>
+            <% if @location.nombre_salon != nil %>
+              Salon: <small><%= @location.nombre_salon %></small>
+            <% end %>
 
-                  <% if @location.nombre_chamber != nil %>
-                    Chambre: <small><%= @location.nombre_chamber %></small>
-                  <% end %>
+            <% if @location.nombre_chamber != nil %>
+              Chambre: <small><%= @location.nombre_chamber %></small>
+            <% end %>
 
-                  <% if @location.nombre_toillete != nil %>
-                    Toillete: <small><%= @location.nombre_toillete %></small>
-                  <% end %>
-                  <br>
-                  <% unless @location.caracteristiques.empty? %>
-                    <% @location.caracteristiques.each do |caracteristique| %>
-                      <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
-                    <% end %>
-                  <% end %>
-              </div>
-            <div class="float-md-right">
+            <% if @location.nombre_toillete != nil %>
+              Toillete: <small><%= @location.nombre_toillete %></small>
+            <% end %>
+            <br>
+            <% unless @location.caracteristiques.empty? %>
+              <% @location.caracteristiques.each do |caracteristique| %>
+                <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="col-md-4">
+            <div class="reserver-content">
               <b><span class="badge badge-success prix"><%= @location.prix %> Fcfa / <%= @location.duree %></span></b><br>
               <!-- Réserver box modal -->
               <button class="btn btn-warning modal-trigger" data-toggle="modal" data-target="#reserver" class="d-flex align-items-end justify-content-end">
@@ -47,42 +56,32 @@
               </button>
               <p><b>Pour toutes informations<br> contactez-nous au (223 71 31 65 44)</b></p>
             </div>
-
-                <% if Admin? %>
-                  <div class="bailleur">
-                    <h5>BAILLEUR</h5>
-                    <%= @location.nom_bailleur %> <br>
-                    <%= @location.email_bailleur %> <br>
-                    <%= @location.telephone_bailleur %> <br>
-                  </div>
-                <% end %>
           </div>
         </div>
       </div>
     </div>
-
   </div>
   
-            <!-- Réserver modal structure -->
-            <div class="modal fade" id="reserver" tabindex="-1" role="dialog" aria-labelledby="reserverLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content card-form">
-                    <div class="modal-header card-header">
-                      <h5 class="modal-title" id="reserverLabel">Reservation</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body" data-indisponible="<%= @location.dates_indisponible.to_json %>">
-                      <%= render  "/reservations/form", reservation: @reservation %>
-                  </div>
-                </div>
-
-              <div class="modal fade" id="reserver" tabindex="-1" role="dialog" aria-labelledby="reserverLabel" aria-hidden="true" class="modal modal-fixed-footer">
-
-                  <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
-                  
-              </div>
-
-            </div>
+  <!-- Réserver modal structure -->
+  <div class="modal fade" id="reserver" tabindex="-1" role="dialog" aria-labelledby="reserverLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content card-form">
+          <div class="modal-header card-header">
+            <h5 class="modal-title" id="reserverLabel">Reservation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <div class="modal-body" data-indisponible="<%= @location.dates_indisponible.to_json %>">
+            <%= render  "/reservations/form", reservation: @reservation %>
+        </div>
+      </div>
+
+    <div class="modal fade" id="reserver" tabindex="-1" role="dialog" aria-labelledby="reserverLabel" aria-hidden="true" class="modal modal-fixed-footer">
+
+        <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+        
+    </div>
+
+  </div>
+</div>

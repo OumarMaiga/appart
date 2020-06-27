@@ -1,0 +1,70 @@
+<% content_for :dashboard_content do %>
+<section class="dashboard-form">
+    <%= form_for @caracteristique, url: create_caracteristique_path, html: {class: "dashboard-form-content"} do |form| %>
+      <div class="container">
+            <% unless params[:libelle] %>
+                <h3>Création d'une caracteristique</h3>
+            <% else %>
+                <h3>Modification de la caracteristique</h3>
+            <% end %>
+        <div class="row">
+          <% if @caracteristique.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@caracteristique.errors.count, "error") %> prohibited this type from being saved:</h2>
+
+              <ul>
+                <% @caracteristique.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="input-group form-group">
+            <%= form.text_field :libelle, class: "form-control", placeholder: 'Libelle' %>
+          </div>
+
+          <div class="input-group form-group">
+            <%= form.text_field :icon, class: "form-control", placeholder: 'Icon' %>
+          </div>
+                <input type="hidden" name="libelle" value="<%=params[:libelle]%>" />
+
+          <div class="form-group">
+            <% unless params[:libelle] %>
+                <%= form.submit "Création", class: "btn btn-outline-warning" %>
+            <% else %>
+                <%= form.submit "Modifier", class: "btn btn-outline-warning" %>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+</section>
+
+<section class="dashboard-tableau">
+    <h2>Liste des caracteristiques</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Libelle</th>
+            <th>Icon</th>
+            <th>Action</th>
+        </thead>
+        <% @caracteristiques.each do |caracteristique| %>
+            <tr>
+                <td><%= caracteristique.libelle %></td>
+                <td><%= caracteristique.icon %></td>
+                <td>
+                    <%= link_to  "Supp", delete_caracteristique_path(caracteristique.libelle), method: :DELETE %>
+                    
+                    <%= link_to  "Modif", edit_caracteristique_path(caracteristique.libelle) %>
+                    
+                    <%= link_to  "Detail", show_caracteristique_path(caracteristique.libelle) %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</section>
+<% end %>
+
+<%= render template: 'pages/dashboard' %>

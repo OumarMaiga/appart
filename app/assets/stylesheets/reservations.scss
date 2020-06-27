@@ -9,11 +9,19 @@
 .modal-content{
     border: 0px
 }
+
 .modal-title{
     text-align: center;
     text-transform: capitalize;
     text-decoration: underline;
 }
+
+.reservation-item-image {
+    width: 100%;
+    height: 220px;
+    border-radius: 3px;
+}
+
 #date{
     color: red;
 }

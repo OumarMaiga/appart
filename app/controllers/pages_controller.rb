@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   
   def index
     @adresses = Location.distinct.pluck(:adresse)
-    @locations = Location.includes(:images, :type).all.limit(4)
+    @locations = Location.includes(:images, :type).all.limit(3)
     @types = Type.where(etat: 1)
   end
 
@@ -76,6 +76,10 @@ class PagesController < ApplicationController
         format.html { render :template =>'locations/index' }
       end
     end
+  end
+
+  def profil
+    @user = User.find_by_email(params[:email])
   end
 
 end

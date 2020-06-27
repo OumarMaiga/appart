@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :types
   has_many :reservations
 
+  # Upload d'image
+  mount_uploader :image, ImageUploader
+  
+
 end

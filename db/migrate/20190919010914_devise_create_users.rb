@@ -39,6 +39,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.integer :telephone, limit: 8
       t.string :image
       t.string :categorie
+      t.boolean :etat, default: true
 
 
       t.timestamps null: false

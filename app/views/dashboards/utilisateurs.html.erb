@@ -1,0 +1,45 @@
+<% content_for :dashboard_content do %>
+
+<section>
+    <div class="jumbotron">
+        <h1 class="display-4">103677</h1>
+        <div class="lead">Utilisateurs inscrits</div>
+    </div>
+</section>
+<section class="dashboard-tableau">
+    <h2>Liste des utilisateurs</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Nom Prenom</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Nombre de reservation</th>
+            <th>Action</th>
+        </thead>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= "#{user.nom} #{user.prenom}" %></td>
+                <td><%= user.email %></td>
+                <td><%= user.telephone %></td>
+                <td>8</td>
+                <td>
+                    <% if user.etat == true %>
+                        <span class="badge badge-success">
+                            <%= link_to "Activer", change_state_user_path(user.email), method: :put %>
+                        </span>
+                    <% else %>
+                        <span class="badge badge-danger">
+                            <%= link_to "Desactiver", change_state_user_path(user.email), method: :put %>
+                        </span>
+                    <% end %>
+                    <%= link_to "Supp", delete_user_path(user.email), method: :DELETE %>
+                    
+                    <%= link_to "Detail", profil_path(user.email) %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</section>
+<% end %>
+
+<%= render template: 'pages/dashboard' %>

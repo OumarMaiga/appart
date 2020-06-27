@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Libelle:</strong>
-  <%= @type.libelle %>
-</p>
-
-<p>
-  <strong>Etat:</strong>
-  <%= @type.etat %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @type.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_type_path(@type) %> |
-<%= link_to 'Back', types_path %>
+<div class="card profil-content">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <%= image_tag @type.image_url, class: "card-img profil-image", alt: "..." %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= "#{@type.libelle}" %></h5>
+        <div class="row">
+            <div class="col-sm-3 profil-title">Etat</div>
+            <div class="col-sm-9">
+                <% if @type.etat == true %>
+                    <span class="badge badge-success">
+                        Activer
+                    </span>
+                <% else %>
+                    <span class="badge badge-danger">
+                        Desactiver
+                    </span>
+                <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
