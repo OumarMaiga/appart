@@ -19,6 +19,11 @@ body{
     background-color: rgba(204, 204, 204, 0.164);
 }
 
+.form-group {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
 .info{
     width: 40%;
     margin-left: 50px;
@@ -87,10 +92,85 @@ body{
     margin-left: 20px;
 }
 
+
 @media (max-width: 768px) {  
     .titre {
         font-size: 2rem;
         padding-left: 0;
         padding-right: 0;
+    }
+  }
+
+  @media (max-width: 576px) {
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    h3 {
+        font-size: 1.35rem;
+    }
+
+      h5 {
+          font-size: 1rem;
+      }
+
+      h6 {
+          font-size: .8rem;
+      }
+
+      p, ol, ul, td {
+        font-size: 11px;
+        line-height: 12px;
+    }
+
+    .badge-type {
+        font-size: 11px;
+    }
+
+    .card-body {
+        padding: 0.25rem
+    }
+
+    .form-group {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .form-inline {
+        margin-top: -2rem;
+    }
+
+    .search-bar {
+        padding: 10px;
+    }
+
+    .search-bar {
+        padding: 10px;
+    }
+
+    .location-item-title {
+        font-size: 14px;
+    }
+
+    .location-item-price {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    #badge {
+        font-size: 9px;
+    }
+
+    .image-adresse {
+        height: 80px;
+    }
+
+    #type-image {
+        height: 90px;
+    }
+
+    .location-item-image {
+        height: 90px;
     }
   }

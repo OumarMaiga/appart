@@ -73,7 +73,7 @@
                 <div class="card-body">
                   <h3 class="card-title" id="titre">
                   <%= link_to location.titre, location_path(location.slug) %> 
-                  <span class="badge badge-warning float-md-right" style="font-size: 14px;"><%= location.type.libelle %></span> 
+                  <span class="badge badge-warning float-md-right badge-type"><%= location.type.libelle %></span> 
                   <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= location.adresse %></small></p>
                   </h3>
                   <hr>
@@ -105,7 +105,7 @@
                       </ul>
                     </div>
                     <div class="col-md-4">
-                      <div class="row d-flex justify-content-end">
+                      <div class="price-location">
                         <span class="badge badge-success float-md-right" style="font-size: 16px;"><%= location.prix %>F / <%= location.duree %></span> 
                       </div>
                     </div>

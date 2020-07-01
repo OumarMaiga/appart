@@ -7,24 +7,24 @@
       <div class="card-body">
         <h5 class="card-title"><%= "#{@user.nom} #{@user.prenom}" %></h5>
         <div class="row">
-            <div class="col-sm-3 profil-title">Adresse</div>
-            <div class="col-sm-9"><%= @user.adresse %></div>
+            <div class="col-5 col-sm-3 profil-title">Adresse</div>
+            <div class="col-7 col-sm-9"><%= @user.adresse %></div>
         </div>
         <div class="row">
-            <div class="col-sm-3 profil-title">Email</div>
-            <div class="col-sm-9">@user.email</div>
+            <div class="col-5 col-sm-3 profil-title">Email</div>
+            <div class="col-7 col-sm-9">@user.email</div>
         </div>
         <div class="row">
-            <div class="col-sm-3 profil-title">Telephone</div>
-            <div class="col-sm-9"><%= @user.telephone %></div>
+            <div class="col-5 col-sm-3 profil-title">Telephone</div>
+            <div class="col-7 col-sm-9"><%= @user.telephone %></div>
         </div>
         <div class="row">
-            <div class="col-sm-3 profil-title">Categorie</div>
-            <div class="col-sm-9"><%= @user.categorie %></div>
+            <div class="col-5 col-sm-3 profil-title">Categorie</div>
+            <div class="col-7 col-sm-9"><%= @user.categorie %></div>
         </div>
         <div class="row">
-            <div class="col-sm-3 profil-title">Etat</div>
-            <div class="col-sm-9">
+            <div class="col-5 col-sm-3 profil-title">Etat</div>
+            <div class="col-7 col-sm-9">
                 <% if @user.etat == true %>
                     <span class="badge badge-success">
                         Activer

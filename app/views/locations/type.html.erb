@@ -12,54 +12,76 @@
         <% 
             @three_location_adresse = Location.where(adresse: adresse).where(type_id: @type.id).limit(3)
         %>
-                <h4 class="title" style="margin-left: 15px;"><%= @type.libelle %> à <%= adresse %></h4>
+            <h4 class="title" style="margin-left: 15px;"><%= @type.libelle %> à <%= adresse %></h4>
             <div class="row" id="three-adresses">
                 <div class=col-12>
                     <div class="card-group">
-                        <!-- Recuperation de l'image d'une adresse -->
-                        <%
-                            @three_location_adresse.each do |location| 
-                            @image = Image.where(location_id: location.id).first
-                        %>
-                        <div class="col-6 col-md-3">
-                            <div class="card">
+                        <div class="row w-100">
+                            <!-- Recuperation de l'image d'une adresse -->
+                            <%
+                                @three_location_adresse.each do |location| 
+                                @image = Image.where(location_id: location.id).first
+                            %>
+                                <div class="col-6 col-md-3">
+                                    <div class="card location-item-content">
 
-                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                    <% if location.images.present? %>
-                                        <div class="carousel-inner">
-                                            <% location.images.each do |image| %>
-                                                <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                            <% if location.images.present? %>
+                                                <div class="carousel-inner">
+                                                    <% location.images.each do |image| %>
+                                                        <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                                                            <a href="<%= location_path(location.slug) %>">
+                                                                <%= image_tag image.libelle_url, class: "location-item-image", alt: location.titre %> 
+                                                            </a>
+                                                        </div>
+                                                    <% end %>
+                                                </div>
+                                            <% else %>
+                                                <div class="carousel-item">
                                                     <a href="<%= location_path(location.slug) %>">
-                                                        <%= image_tag image.libelle_url, class: "location-item-image", alt: location.titre %> 
+                                                        <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
                                                     </a>
                                                 </div>
                                             <% end %>
                                         </div>
-                                    <% else %>
-                                        <div class="carousel-item">
-                                            <a href="<%= location_path(location.slug) %>">
-                                                <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
-                                            </a>
-                                        </div>
-                                    <% end %>
-                                </div>
 
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <a href="<%= location_path(location.slug) %>">
-                                            <%= location.titre %>
-                                        </a>
-                                    </h5>
-                                        <p class="location-item-price">
-                                            <span class="badge badge-success"><%= location.prix %>f / <%= location.duree %></span>
-                                        </p>
-                                    <p class="card-text">
-                                        <%= location.description %>
-                                    </p>
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <a href="<%= location_path(location.slug) %>">
+                                                    <%= location.titre %>
+                                                </a>
+                                            </h5>
+                                            <p class="location-item-price">
+                                                <span class="badge badge-success"><%= location.prix %>f / <%= location.duree %></span>
+                                            </p>
+                                            <p class="card-text">
+                                                <% if location.nombre_salon != nil || location.nombre_chamber != nil || location.nombre_toillete != nil %>
+                                                        <% if location.nombre_salon != nil %>
+                                                        Salon: <small><%= location.nombre_salon %>&nbsp</small>
+                                                        <% end %>
+
+                                                        <% if location.nombre_chamber != nil %>
+                                                        Chambre: <small><%= location.nombre_chamber %>&nbsp</small>
+                                                        <% end %>
+
+                                                        <% if location.nombre_toillete != nil %>
+                                                        Toillete: <small><%= location.nombre_toillete %>&nbsp</small>
+                                                        <% end %>
+                                                    <br>
+                                                    <% end %>
+                                                    <% unless location.caracteristiques.empty? %>
+                                                    
+                                                        <% location.caracteristiques.each do |caracteristique| %>
+                                                        <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
+                                                        <% end %>
+                                                    <br>
+                                                <% end %>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            <% end %>
                         </div>
-                        <% end %>
                     </div>
                 </div>
             </div>
@@ -74,10 +96,12 @@
         <h4 class="type"><%= @type.libelle %> par adresse</h4>
         <div class="row">
                 <% @adresses.each do |adresse| %>
-                        <a href="<%= type_adresse_path(@type.slug, adresse) %>" class="adresse-type">
+                    <div class="adresse-type">
+                        <a href="<%= type_adresse_path(@type.slug, adresse) %>">
                                 <%= adresse %><br>
                                 <%= Location.where(type_id: @type.id).where(adresse: adresse).count %> <%= @type.libelle %>s
                         </a>
+                    </div>
                 <% end %>
         </div>
     </div>

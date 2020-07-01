@@ -33,12 +33,9 @@
           <div class="col-md-8">
             <ul class="description">
               <li>
-                <%= reservation.location.description %>
+                Reservé au nom de <b><%= "#{reservation.nom} #{reservation.prenom}" %></b>
               </li>
-              <li>
-                reservé au nom de <b><%= "#{reservation.nom} #{reservation.prenom}" %></b>
-              </li>
-              <% if !reservation.location.nombre_adulte.nil? || !reservation.location.nombre_enfant.nil? %>
+              <% if !reservation.nombre_adulte.nil? || !reservation.nombre_enfant.nil? %>
                 <li>
                   <b><%= "Adulte: #{reservation.nombre_adulte}  | " if !reservation.nombre_adulte.nil? %></b> <b><%= "Enfant: #{reservation.nombre_enfant}" if !reservation.nombre_enfant.nil? %></b>
                 </li>

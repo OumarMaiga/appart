@@ -25,6 +25,10 @@
     text-transform: uppercase;
  }
 
+ .badge-type {
+     font-size: 14px;
+ }
+
 .show_image{
     width: 1300px; 
     height:500px;
@@ -53,6 +57,12 @@
 .prix{
     font-size: 14px;
     margin-bottom: 5px;
+}
+
+.price-location {
+    font-size: 16px;
+    display: flex;
+    justify-content: end;
 }
 
 .modal-overlay {
@@ -94,7 +104,8 @@
     margin-right: 4px;
     margin-bottom: 8px;
     min-width: 8%;
-    max-width: 20%;
+    max-width: 30%;
+    word-wrap: break-word;
 }
 .show-ecrit{
     margin-top: 40px;
@@ -137,5 +148,14 @@
 
     .reserver-content {
         text-align: left;
+    }
+
+    .image-large {
+        height: 200px;
+    }
+
+    .image-small {
+        width: 100px;
+        height: 80px; 
     }
   }

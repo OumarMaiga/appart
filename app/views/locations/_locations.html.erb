@@ -8,36 +8,38 @@
     <div class="row">
         <div class=col-12>
             <div class="card-group">
-                <% @locations.each do |location| %>
-                    <div class="col-6 col-md-4">
-                        <div class="card location-item-content">
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                <% if location.images.present? %>
-                                    <div class="carousel-inner">
-                                        <% location.images.each do |image| %>
-                                            <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
-                                                <a href="<%= location_path(location.slug) %>">
-                                                    <%= image_tag image.libelle_url, class: "card-img-top location-item-image" %> 
-                                                </a>
-                                            </div>
-                                        <% end %>
-                                    </div>
-                                <% else %>
-                                    <div class="carousel-item">
-                                        <a href="<%= location_path(location.slug) %>">
-                                            <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
-                                        </a>
-                                    </div>
-                                <% end %>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="location-item-title"><%= link_to location.titre, location_path(location.slug) %><span class="badge badge-warning float-md-right" id="badge"><%= location.type.libelle %></span><h6>
-                                <p class="location-item-adresse"><small class="text-muted"><i class="fas fa-map-marker-alt"></i> <%= location.adresse %></small></p>
-                                <p class="location-item-price"><span class="badge badge-success"><%= location.prix %>f / <%= location.duree %></span></p>                                                    
+                <div class="row w-100">
+                    <% @locations.each do |location| %>
+                        <div class="col-6 col-md-4">
+                            <div class="card location-item-content">
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                    <% if location.images.present? %>
+                                        <div class="carousel-inner">
+                                            <% location.images.each do |image| %>
+                                                <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                                                    <a href="<%= location_path(location.slug) %>">
+                                                        <%= image_tag image.libelle_url, class: "card-img-top location-item-image" %> 
+                                                    </a>
+                                                </div>
+                                            <% end %>
+                                        </div>
+                                    <% else %>
+                                        <div class="carousel-item">
+                                            <a href="<%= location_path(location.slug) %>">
+                                                <%= image_tag 'maison.png', heigth: '90%', width: '250px' %>
+                                            </a>
+                                        </div>
+                                    <% end %>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="location-item-title"><%= link_to location.titre, location_path(location.slug) %><span class="badge badge-warning float-md-right" id="badge"><%= location.type.libelle %></span></h6>
+                                    <p class="location-item-adresse"><small class="text-muted"><i class="fas fa-map-marker-alt"></i> <%= location.adresse %></small></p>
+                                    <p class="location-item-price"><span class="badge badge-success"><%= location.prix %>f / <%= location.duree %></span></p>                                                    
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <% end %>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>

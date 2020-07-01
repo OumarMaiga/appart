@@ -12,29 +12,31 @@
     <!-- Type -->
     <section id="section_type" style="margin-top: 40px;">
         <h2 class="title" style="margin-left: 15px;">Type de location</h2>
-            <p class="text-type-bar"></p>
-            <p class="text-type">
-                Reserver des appartments pour des logements et des magasins pour ventes ou stocks
-            </p>
-            <div class="row">
+        <p class="text-type-bar"></p>
+        <p class="text-type">
+            Reserver des appartments pour des logements et des magasins pour ventes ou stocks
+        </p>
+        <div class="row">
             <div class="col-12">
                 <div class="card-group">
-                    <% @types.each do |type| %>
-                        <div class="col-sm-6 col-md-4">
-                            <div class="card">
-                                <a href="<%= type_location_path(type.slug) %>">
-                                    <%= image_tag type.image_url, class: "card-img-top", alt: type.libelle, id: "type-image"%>
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= type.libelle %></h5>
-                                    <p class="card-text"><%= Location.where(type: type.id).count %> <%= type.libelle %></p>
+                    <div class="row w-100">
+                        <% @types.each do |type| %>
+                            <div class="col-6 col-md-4">
+                                <div class="card">
+                                    <a href="<%= type_location_path(type.slug) %>">
+                                        <%= image_tag type.image_url, class: "card-img-top", alt: type.libelle, id: "type-image"%>
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= type.libelle %></h5>
+                                        <p class="card-text"><%= Location.where(type: type.id).count %> <%= type.libelle %></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <% end %>
-                </div>
+                        <% end %>
+                    </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- Location -->
@@ -43,28 +45,32 @@
     <!-- Par quartier --> 
     <section style="margin-top: 40px;">
         <h2 class="title">Destinations populaires</h2>
-            <p class="text-destination-bar"></p>
-            <div class="row">
+        <p class="text-destination-bar"></p>
+        <div class="row">
+            <div class="col-12">
                 <div class="card-group">
-                    <% @adresses.each do |adresse| %>
-                    <!-- Recuperation de l'image d'un adresse -->
-                        <% 
-                            @location_adresse = Location.where(adresse: adresse).first
-                            @image = Image.where(location_id: @location_adresse).first
-                        %>
-                        <div class="col-3">
-                            <div class="card adresse-content">
-                                <a href="<%= adresse_path(adresse) %>">
-                                    <%= image_tag @image.libelle_url, class: "card-img-top image-adresse", alt: adresse %>
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><i class="fas fa-map-marker-alt"></i>  <%= link_to adresse, adresse_path(adresse) %></h5>
-                                    <p class="card-text"><%= Location.where(adresse: adresse).count %> locations</p>
+                    <div class="row w-100">
+                        <% @adresses.each do |adresse| %>
+                        <!-- Recuperation de l'image d'un adresse -->
+                            <% 
+                                @location_adresse = Location.where(adresse: adresse).first
+                                @image = Image.where(location_id: @location_adresse).first
+                            %>
+                            <div class="col-4 col-md-3">
+                                <div class="card adresse-content">
+                                    <a href="<%= adresse_path(adresse) %>">
+                                        <%= image_tag @image.libelle_url, class: "card-img-top image-adresse", alt: adresse %>
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-map-marker-alt"></i>  <%= link_to adresse, adresse_path(adresse) %></h5>
+                                        <p class="card-text"><%= Location.where(adresse: adresse).count %> locations</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <% end %>
+                        <% end %>
+                    </div>
                 </div>
+            </div>
         </div>
     </section>
 </div>

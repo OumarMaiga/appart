@@ -1,4 +1,5 @@
 <div class="container">
+<h2>Reservation</h2>
 <div id="imageContainer">
     <div class="image_head">
         <%= image_tag(@image.libelle_url, class: 'image-large') if @image.present? %>
@@ -19,13 +20,13 @@
           </h3>
 
           <hr>
-          <div style="font-size: 16px;">
-            <div class="caracteristique"><%= @reservation.location.description %></div>
             <div class="row">
               <div class="col-md-8">
                   <b><span class="badge badge-success prix"><%= @reservation.location.prix %> Fcfa / <%= @reservation.location.duree %></span></b>
-                  <h5><%= "CARACTERISTIQUES" if @reservation.location.nombre_salon != nil || @location.nombre_chamber != nil || @location.nombre_toillete != nil %></h5>
-                   <% if @reservation.location.nombre_salon != nil %>
+                <ul class="description">
+                  <% if @reservation.location.nombre_salon != nil || @location.nombre_chamber != nil || @location.nombre_toillete != nil %>
+                  <li>
+                    <% if @reservation.location.nombre_salon != nil %>
                       Salon: <small><%= @reservation.location.nombre_salon %></small>
                     <% end %>
 
@@ -36,17 +37,21 @@
                     <% if @reservation.location.nombre_toillete != nil %>
                       Toillete: <small><%= @reservation.location.nombre_toillete %></small>
                     <% end %>
+                  </li>
+                  <% end %>
                     
-                    <% unless @reservation.location.caracteristiques.empty? %>
-                        <h6><%= @reservation.location.caracteristiques.map(&:libelle).join(' - ') %></h6>
-                    <% end %><br>
+                  <% unless @reservation.location.caracteristiques.empty? %>
+                    <li>
+                      <h6><%= @reservation.location.caracteristiques.map(&:libelle).join(' - ') %></h6>
+                    </li>
+                  <% end %>
+                </ul>
       
               </div>
               <div class="col-md-4 d-flex align-items-end justify-content-end">
                   <%= link_to  "Detail", location_path(@reservation.location.slug), class: "btn btn-warning" %>
               </div>
             </div>
-          </div>
         </div>
         <div class="col-md-6">
             <h3 class="card-title">

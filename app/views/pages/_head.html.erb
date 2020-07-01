@@ -2,18 +2,51 @@
     <!--Bar de navigation-->
         <div class="background">
             <div class="layer">
+
+
+        <% if notice || alert %>
+          <div class="info">
+            <% if notice %>
+            <div class="alert alert-success" role="alert">
+              <%= notice %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <% end %>
+            <% if alert %>
+            <div class="alert alert-danger" role="alert">
+              <%= alert %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+
                 <div class="titre">
                     Reserver vos appartement à Bamako et aux environs
                 </div>
                 <div class="search">
                         <%= form_tag(search_path, method: :get, class: 'form-inline') do %>
-                            <div id="search-data" class="input-field search-bar" data-adresses="<%= @adresses.to_json %>">
-                                    <%= text_field_tag :query, nil, autocomplete: 'off', placeholder: "Quartier..." %>
-                                    <input type="text" id="debut" class="flatpickr-input" placeholder="Date de debut" name="debut" />
-                                    -
-                                    <input type="text" id="fin" class="flatpickr-input" placeholder="Date de fin" name="fin" />
+                            <div id="search-data" class="form-row search-bar" data-adresses="<%= @adresses.to_json %>">
+                                <div class="form-group">
+                                    <%= text_field_tag :query, nil, class: "form-control", autocomplete: 'off', placeholder: "Quartier..." %>
+                                </div>
+                                &nbsp;&nbsp;
+                                <div class="form-group">
+                                    <input type="text" id="debut" class="form-control flatpickr-input" placeholder="Date de debut" name="debut" />
+                                </div>
+                                &nbsp;&nbsp;
+                                <div class="form-group">
+                                    <input type="text" id="fin" class="form-control flatpickr-input" placeholder="Date de fin" name="fin" />
+                                </div>
+                                &nbsp;&nbsp;
                                     <!--<%= number_field_tag :nombre_personne %>-->
-                                <%= submit_tag 'Rechercher', :class => 'btn btn-outline-warning' %>
+                                <div class="form-group">
+                                    <%= submit_tag 'Rechercher', :class => 'btn btn-outline-warning' %>
+                                </div>
                             </div>
                         <% end %>
                 </div>
