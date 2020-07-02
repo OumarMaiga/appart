@@ -36,14 +36,15 @@
                 <ul class=" navbar-nav navbar-right">
                     <% if user_signed_in? %>
                         <li class="nav-item">
-                            <%= link_to  "Deconnexion", destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' }, class: 'btn btn-outline-warning btn_con nav-link', type: "button" %>
+                            <%= link_to  "Deconnexion", destroy_user_session_path, method: :DELETE, data: { confirm:'Voulez-vous vous deconnecter ?' }, class: 'btn btn-login nav-link', type: "button" %>
                         </li>
                     <% else %>
                         <li class="nav-item">
-                            <%= link_to  "Inscription", new_user_registration_path, class: 'btn btn-outline-warning btn-md btn_con nav-link', type: "button" %>
+                            <%= link_to  "Inscription", new_user_registration_path, class: 'btn btn-login btn-md nav-link', type: "button" %>
                         </li>
+                        &nbsp;&nbsp;
                         <li class="nav-item">
-                            <%= link_to  "Connexion", new_user_session_path, class: 'btn btn-outline-warning btn-md btn_con nav-link', type: "button" %>
+                            <%= link_to  "Connexion", new_user_session_path, class: 'btn btn-login btn-md nav-link', type: "button" %>
                         </li>
                     <% end %>
                 </ul>

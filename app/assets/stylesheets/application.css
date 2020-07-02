@@ -31,11 +31,11 @@ body{
 }
 
 .navigation{
-    background-color: yellow;
+    background-color: #c6a800;
     padding-right: 30px;
     padding-left: 30px;   
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 .background{
@@ -46,7 +46,7 @@ body{
 }
 
 .layer{
-    background-color: rgba(251, 255, 0, 0.6);
+    background-color: #ffff6ba9;
     position: absolute;
     height: 400px;
     width: 100%;
@@ -65,28 +65,40 @@ body{
 
 .input-group-prepend span{
     width: 50px;
-    background-color: #FFC312;
+    background-color: #fdd835;
     color: black;
     border:0 !important;
 }
 
- .login_btn{
-    color: black;
-    background-color: #FFC312;
-    width: 100px;
+.btn-login {
+    color: #000000;
+    background-color: #fdd835;
+    height: 35px;
+    padding-top: 5px;
+}
+
+.btn-login:hover {
+    color: #000000;
+    background-color: #ffff6b;
+}
+
+.btn-custom{
+    color: #000000;
+    background-color: #fdd835;
+}
+
+ .btn-outline-custom{
+    color: #fdd835;
+    border-color: #fdd835;
+    background-color: #ffffff;
 }
     
-.login_btn:hover{
+.btn-outline-custom:hover{
     color: black;
-    background-color: white;
+    background-color: #fdd835;
+    border-color: #fdd835;
 }
-.btn_con{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    height: auto;
-    margin-right: 10px;
-    color: black;
-}
+
 #btn_creation{
     margin-top: 10px;
     margin-left: 20px;
