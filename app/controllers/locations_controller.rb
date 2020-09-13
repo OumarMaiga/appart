@@ -25,11 +25,15 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
+    @locations = Location.all
+    render 'locations'
   end
 
   # POST /locations
   # POST /locations.json
   def create
+    location_params = params.require(:location).permit(:titre, :adresse, :description, :etat, :prix, :duree, :type_id, :nombre_adulte, :nombre_enfant, :nombre_salon, :nombre_chamber, :nombre_toillete, :nom_bailleur, :email_bailleur, :telephone_bailleur, :adresse_bailleur, :user_id, images_attributes: [:id, :location, :libelle], caracteristique_ids: [])
+
     params[:location][:adresse].inspect
       @location = current_user.locations.new(location_params) if user_signed_in?
 
@@ -43,7 +47,7 @@ class LocationsController < ApplicationController
           end
         end
 
-        format.html { redirect_to location_path(@location.slug), notice: 'Location créée avec succès.' }
+        format.html { redirect_to show_location_path(@location.slug), notice: 'Location créée avec succès.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -59,6 +63,24 @@ class LocationsController < ApplicationController
   # PATCH/PUT /locations/1
   # PATCH/PUT /locations/1.json
   def update
+
+    @locations = Location.all
+    
+    if @location.update(location_params)
+
+      if is_image?
+        params[:images]['libelle'].each do |a|
+          @image = @location.images.create!(:libelle => a)
+        end
+      end
+
+      @location = Location.new
+      redirect_to dashboards_locations_path
+
+    else
+      render 'locations', notice: "Mise à jour non effectuée"
+    end
+=begin 
     respond_to do |format|
       if @location.update(location_params)
         
@@ -75,6 +97,7 @@ class LocationsController < ApplicationController
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
     end
+=end
   end
 
   # DELETE /locations/1
@@ -82,7 +105,7 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to dashboards_locations_url, notice: 'Location a été supprimer.' }
       format.json { head :no_content }
     end
   end
@@ -101,20 +124,60 @@ class LocationsController < ApplicationController
   def filter
     @nuit = params[:nuit]
     @mois = params[:mois]
-    @magasin = params[:Magasin]
-    @appartement = params[:Appartement]
+    
+    @types =  params[:location][:type_ids]
+    
+    # Locations par durée
+    if !@nuit.nil? && !@mois.nil?
+      @types.each do |type|
+        if @locations.nil?
+          @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
+        else
+          @locations += Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
+        end
+      end
 
+    elsif !@nuit.nil? && @mois.nil?
+      @types.each do |type|
+        if @locations.nil?
+          @locations = Location.where(duree: 'nuit').where(type: type).includes(:images, :type)
+        else
+          @locations += Location.where(duree: 'nuit').where(type: type).includes(:images, :type)
+        end
+      end
+
+    elsif @nuit.nil? && !@mois.nil?
+      @types.each do |type|
+        if @locations.nil?
+          @locations = Location.where(duree: 'mois').where(type: type).includes(:images, :type)
+        else
+          @locations += Location.where(duree: 'mois').where(type: type).includes(:images, :type)
+        end
+      end
+
+    else
+      @types.each do |type|
+        if @locations.nil?
+          @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
+        else
+          @locations += Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
+        end
+      end
+
+    end
+
+=begin
     # Locations par durée
     if !@nuit.nil? && !@mois.nil?
       if !@magasin.nil? && !@appartement.nil?
-        #puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
-        puts @locations = Location.where("(duree = 'nuit' OR duree= 'mois') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
+        #@locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
+        @locations = Location.where("(duree = 'nuit' OR duree= 'mois') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
       elsif !@magasin.nil?
-        puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 2).includes(:images, :type)
+        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 2).includes(:images, :type)
       elsif !@appartement.nil?
-        puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).includes(:images, :type)
+        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).includes(:images, :type)
       else
-        puts @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).includes(:images, :type)
+        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).includes(:images, :type)
       end
     elsif !@nuit.nil?
       if !@magasin.nil? && !@appartement.nil?
@@ -153,7 +216,7 @@ class LocationsController < ApplicationController
         @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).includes(:images, :type)
       end
     end
-    
+=end
 
     respond_to do |format|
       format.js

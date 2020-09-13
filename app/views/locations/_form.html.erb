@@ -1,102 +1,138 @@
-    <div class="col-md-6">
-      <%= simple_form_for(@location, local: true) do |form| %>
-        <% if location.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
 
-            <ul>
-              <% location.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+    <%= simple_form_for @location, :html => {class: "dashboard-form-content"}  do |form| %>
+        <div class="container">
+            <% unless params[:slug] %>
+                <h3>Création d'une location</h3>
+            <% else %>
+                <h3>Modification de la location</h3>
+            <% end %>
+            <div class="row">
 
-        <div class="input-group form-group">
-          <%= form.text_field :titre, class: "form-control", placeholder: 'Titre' %>
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :titre, class: "form-control", placeholder: 'Titre' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :adresse, class: "form-control", placeholder: 'Adresse' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_area :description, class: "form-control", placeholder: 'Description' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <span class="input-group-text"><%= form.label :'Activer' %></span>
+                        <%= form.check_box :etat, class: "form-control" %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :prix, class: "form-control", placeholder: 'Prix' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.select :duree, [['Prix par...', nil], 'nuit', 'mois'], {}, class: "form-control" %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <span class="input-group-text"><%= form.label :type %></span>
+                        <%= form.select :type_id, Type.pluck(:libelle, :id), {}, class: "form-control" %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <%= form.fields_for :images do |p| %>
+                        <div class="input-group form-group">
+                            <span class="input-group-text"><%= form.label :images %></span>
+                            <%= p.file_field :libelle, class: "form-control", :multiple => true, name: "images[libelle][]" %>
+                        </div>
+                    <% end %>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.association :caracteristiques, as: :check_boxes, label: "Caracteristique: ", class: "form-control", :label_method => lambda { |caracteristique| "#{caracteristique.libelle}" } %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :nombre_adulte, class: "form-control", placeholder: 'Nombre max d\'adulte' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :nombre_enfant, class: "form-control", placeholder: 'Nombre max d\'enfant' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :nombre_salon, class: "form-control", placeholder: 'Nombre de salon' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :nombre_chamber, class: "form-control", placeholder: 'Nombre de chambre' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :nombre_toillete, class: "form-control", placeholder: 'Nombre de toillet' %>
+                    </div>  
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :nom_bailleur, class: "form-control", placeholder: 'Nom complet du bailleur' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.email_field :email_bailleur, class: "form-control", placeholder: 'Email du bailleur' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_field :telephone_bailleur, class: "form-control", placeholder: 'Telephone du bailleur' %>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group form-group">
+                        <%= form.text_area :adresse_bailleur, class: "form-control", placeholder: 'Adresse du bailleur' %>
+                    </div>
+
+                    <div class="input-group form-group">
+                        <%= form.hidden_field :user_id %>
+                        <input type="hidden" name="slug" value="<%=params[:slug]%>" />
+                    </div>
+                </div>
+                
+            </div>
+            <div class="form-group">
+            <% unless params[:slug] %>
+                <input type="submit" value="Créer" class= "btn btn-outline-custom" %>
+            <% else %>
+                <input type="submit" value="Modifier" class= "btn btn-outline-custom" %>
+            <% end %>
+            </div>
         </div>
-
-        <div class="input-group form-group">
-          <%= form.text_field :adresse, class: "form-control", placeholder: 'Adresse' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_area :description, class: "form-control", placeholder: 'Description' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.label :'Activer' %>
-          <%= form.check_box :etat, class: "form-control" %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_field :prix, class: "form-control", placeholder: 'Prix' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.select :duree, [['Prix par...', nil], 'nuit', 'mois'], class: "form-control" %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.label :type %>
-          <%= form.select :type_id, Type.pluck(:libelle, :id), class: "form-control" %>
-        </div>
-
-        <%= form.fields_for :images do |p| %>
-          <div class="input-group form-group">
-            <%= form.label :images %>
-            <%= p.file_field :libelle, class: "form-control", :multiple => true, name: "images[libelle][]" %>
-          </div>
-        <% end %>
-          
-        <div class="input-group form-group">
-          <%= form.association :caracteristiques, as: :check_boxes, label: "Caracteristique: ", class: "form-control", :label_method => lambda { |caracteristique| "#{caracteristique.libelle}" } %>
-        </div>
-      </div>
-      <div class="col-md-6">
-
-        <div class="input-group form-group">
-          <%= form.text_field :nombre_adulte, class: "form-control", placeholder: 'Nombre max d\'adulte' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_field :nombre_enfant, class: "form-control", placeholder: 'Nombre max d\'enfant' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_field :nombre_salon, class: "form-control", placeholder: 'Nombre de salon' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_field :nombre_chamber, class: "form-control", placeholder: 'Nombre de chambre' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_field :nombre_toillete, class: "form-control", placeholder: 'Nombre de toillet' %>
-        </div>  
-
-        <div class="input-group form-group">
-          <%= form.text_field :nom_bailleur, class: "form-control", placeholder: 'Nom complet du bailleur' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.email_field :email_bailleur, class: "form-control", placeholder: 'Email du bailleur' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_field :telephone_bailleur, class: "form-control", placeholder: 'Telephone du bailleur' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.text_area :adresse_bailleur, class: "form-control", placeholder: 'Adresse du bailleur' %>
-        </div>
-
-        <div class="input-group form-group">
-          <%= form.hidden_field :user_id %>
-        </div>
-
-        <div class="form-group">
-          <%= form.submit 'Création', class: "btn btn-outline-warning" %>
-        </div>
-      </div>
     <% end %>

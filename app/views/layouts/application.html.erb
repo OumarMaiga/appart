@@ -39,13 +39,15 @@
 
   <body>
 
-      <% unless content_for?(:dashboard_content) %>
-        <%= render template: 'pages/_nav' %>
-      <% end %>
-      <%= yield %>
+      <div class="container-fluid">
+        <% unless content_for?(:dashboard_content) %>
+          <%= render template: 'pages/_nav' %>
+        <% end %>
+        <%= yield %>
 
-      <%= yield :dashboard %>
-      <!-- Footer -->
-      <%= render template: 'pages/_foot' %>
+        <%= yield :dashboard %>
+        <!-- Footer -->
+        <%= render template: 'pages/_foot' %>
+      </div>
   </body>
 </html>

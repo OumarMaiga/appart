@@ -42,55 +42,11 @@ section {
     font-weight: bold;
 }
 
-.text-type-bar {
-    border-bottom: 2px solid rgb(133, 50, 21);
-    width: 25vh;
-    margin-left: 15px;
-}
-
-.text-type {
-    color: #6c757d;
-    margin-left: 15px;
-}
-
-.text-location-bar {
-    border-bottom: 2px solid rgb(133, 50, 21);
-    width: 25vh;
-    margin-left: 45%;
-    text-align: center;
-    
-}
-
-.text-location {
-    color: #6c757d;
-    text-align: center;
-}
-
-.text-destination-bar {
+.text-title-bar {
     border-bottom: 2px solid rgb(133, 50, 21);
     width: 25vh;
 }
 
-.location-item-content {
-    background-color: rgba(248, 237, 207, 0.404);
-    border: 1px solid rgba(122, 100, 51, 0.125);
-    margin-bottom: 5px;
-}
-
-.location-item-title{
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.location-item-adresse {
-    margin-top: -8px;
-}
-
-.location-item-price {
-    color: rgb(114, 69, 37);
-    font-size: 1.25rem;
-    font-weight: 600;
-}
 
 #section_type{
     padding-bottom: 20px;

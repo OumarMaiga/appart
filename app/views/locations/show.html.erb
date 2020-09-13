@@ -17,7 +17,7 @@
               <%= image_tag(image.libelle_url, class: 'image-small') if image.libelle.present? %>
           <% end %>
         </div>
-      <div class="show-ecrit">
+      <div class="location-item-container">
         <div class="description">
           <%= @location.description %>
         </div>
@@ -31,25 +31,25 @@
             <% if @location.nombre_salon != nil %>
               Salon: <small><%= @location.nombre_salon %></small>
             <% end %>
-
+            &nbsp;&nbsp;
             <% if @location.nombre_chamber != nil %>
               Chambre: <small><%= @location.nombre_chamber %></small>
             <% end %>
-
+            &nbsp;&nbsp;
             <% if @location.nombre_toillete != nil %>
               Toillete: <small><%= @location.nombre_toillete %></small>
             <% end %>
             <br>
             <% unless @location.caracteristiques.empty? %>
               <% @location.caracteristiques.each do |caracteristique| %>
-                <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
+                <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %></span>&nbsp;&nbsp;
               <% end %>
             <% end %>
           </div>
 
           <div class="col-md-4">
             <div class="reserver-content">
-              <b><span class="badge badge-success prix"><%= @location.prix %> Fcfa / <%= @location.duree %></span></b><br>
+              <span class="location-item-price"><%= @location.prix %> Fcfa / <%= @location.duree %></span><br>
               <!-- Réserver box modal -->
               <button class="btn btn-custom modal-trigger" data-toggle="modal" data-target="#reserver" class="d-flex align-items-end justify-content-end">
                 Reserver

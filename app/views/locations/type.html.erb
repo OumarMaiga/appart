@@ -12,7 +12,7 @@
         <% 
             @three_location_adresse = Location.where(adresse: adresse).where(type_id: @type.id).limit(3)
         %>
-            <h4 class="title" style="margin-left: 15px;"><%= @type.libelle %> à <%= adresse %></h4>
+            <h4 class="title"><%= @type.libelle %> à <%= adresse %></h4>
             <div class="row" id="three-adresses">
                 <div class=col-12>
                     <div class="card-group">
@@ -22,7 +22,7 @@
                                 @three_location_adresse.each do |location| 
                                 @image = Image.where(location_id: location.id).first
                             %>
-                                <div class="col-6 col-md-3">
+                                <div class="col-6 col-md-4">
                                     <div class="card location-item-content">
 
                                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -52,27 +52,27 @@
                                                 </a>
                                             </h5>
                                             <p class="location-item-price">
-                                                <span class="badge badge-success"><%= location.prix %>f / <%= location.duree %></span>
+                                                <%= location.prix %>f / <%= location.duree %>
                                             </p>
-                                            <p class="card-text">
+                                            <p class="description">
                                                 <% if location.nombre_salon != nil || location.nombre_chamber != nil || location.nombre_toillete != nil %>
                                                         <% if location.nombre_salon != nil %>
-                                                        Salon: <small><%= location.nombre_salon %>&nbsp</small>
+                                                        Salon: <small><%= location.nombre_salon %>&nbsp&nbsp</small>
                                                         <% end %>
 
                                                         <% if location.nombre_chamber != nil %>
-                                                        Chambre: <small><%= location.nombre_chamber %>&nbsp</small>
+                                                        Chambre: <small><%= location.nombre_chamber %>&nbsp&nbsp</small>
                                                         <% end %>
 
                                                         <% if location.nombre_toillete != nil %>
-                                                        Toillete: <small><%= location.nombre_toillete %>&nbsp</small>
+                                                        Toillete: <small><%= location.nombre_toillete %>&nbsp&nbsp</small>
                                                         <% end %>
                                                     <br>
                                                     <% end %>
                                                     <% unless location.caracteristiques.empty? %>
                                                     
                                                         <% location.caracteristiques.each do |caracteristique| %>
-                                                        <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %>  </span>
+                                                        <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %></span>&nbsp&nbsp
                                                         <% end %>
                                                     <br>
                                                 <% end %>

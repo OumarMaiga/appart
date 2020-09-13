@@ -1,8 +1,8 @@
 
 <section>
-    <h2 class="title text-center">Locations préférées des clients</h2>
-        <p class="text-location-bar"></p>
-        <p class="text-location">
+    <h2 class="title">Locations préférées des clients</h2>
+        <p class="text-title-bar"></p>
+        <p class="text-muted">
             Quelque locations très recommandée par nos fidèles utilisateurs
         </p>
     <div class="row">
@@ -34,7 +34,7 @@
                                 <div class="card-body">
                                     <h6 class="location-item-title"><%= link_to location.titre, location_path(location.slug) %><span class="badge badge-warning float-md-right" id="badge"><%= location.type.libelle %></span></h6>
                                     <p class="location-item-adresse"><small class="text-muted"><i class="fas fa-map-marker-alt"></i> <%= location.adresse %></small></p>
-                                    <p class="location-item-price"><span class="badge badge-success"><%= location.prix %>f / <%= location.duree %></span></p>                                                    
+                                    <p class="location-item-price"><%= location.prix %>f / <%= location.duree %></p>                                                    
                                 </div>
                             </div>
                         </div>
