@@ -66,7 +66,7 @@ gem 'mini_magick', '~> 4.9', '>= 4.9.5'
 gem 'simple_form'
 
 # Pagination
-gem 'kaminari', '~> 0.16.3'
+gem 'kaminari', '~> 1.2.1'
 
 # Remplace id by slug in url 
 gem 'stringex', '~> 2.6'
