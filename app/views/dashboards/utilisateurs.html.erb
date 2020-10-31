@@ -22,19 +22,28 @@
                 <td><%= user.email %></td>
                 <td><%= user.telephone %></td>
                 <td>8</td>
-                <td>
-                    <% if user.etat == true %>
-                        <span class="badge badge-success">
-                            <%= link_to "Activer", change_state_user_path(user.email), method: :put %>
-                        </span>
-                    <% else %>
-                        <span class="badge badge-danger">
-                            <%= link_to "Desactiver", change_state_user_path(user.email), method: :put %>
-                        </span>
-                    <% end %>
-                    <%= link_to "Supp", delete_user_path(user.email), method: :DELETE %>
-                    
-                    <%= link_to "Detail", profil_path(user.email) %>
+                <td class="d-flex justify-content-around">
+                  <% if user.etat == true %>
+                    <span class="badge badge-success">
+                        <%= link_to "Activer", change_state_user_path(user.email), method: :put %>
+                    </span>
+                  <% else %>
+                    <span class="badge badge-danger">
+                        <%= link_to "Desactiver", change_state_user_path(user.email), method: :put %>
+                    </span>
+                  <% end %>
+                  
+                  <a href="<%= edit_admin_path(user.email) %>">
+                    <span class="fas fa-edit" alt="Modifier"></span>
+                  </a>
+
+                  <a href="<%= delete_user_path(user.email) %>" data-method="DELETE">
+                    <span class="fas fa-trash" style="color: red;" alt="Supprimer"></span>
+                  </a>
+
+                  <a href="<%= profil_path(user.email) %>">
+                    <span class="fas fa-plus" alt="Developper"></span>
+                  </a>
                 </td>
             </tr>
         <% end %>

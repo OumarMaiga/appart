@@ -78,23 +78,29 @@
                 <td><%= admin.email %></td>
                 <td><%= admin.telephone %></td>
                 <td><%= admin.adresse %></td>
-                <td>
-                    <% if admin.etat == true %>
-                        <span class="badge badge-success">
-                            <%= link_to "Activer", change_state_admin_path(admin.email), method: :put %>
-                        </span>
-                    <% else %>
-                        <span class="badge badge-danger">
-                            <%= link_to "Desactiver", change_state_admin_path(admin.email), method: :put %>
-                        </span>
-                    <% end %>
-                    
-                    <%= link_to "Supp", delete_admin_path(admin.email), method: :DELETE %>
+                <td class="d-flex justify-content-around">
 
-                    <%= link_to "Modif", edit_admin_path(admin.email) %>
+                        <% if admin.etat == true %>
+                            <span class="badge badge-success">
+                                <%= link_to "Activer", change_state_admin_path(admin.email), method: :put %>
+                            </span>
+                        <% else %>
+                            <span class="badge badge-danger">
+                                <%= link_to "Desactiver", change_state_admin_path(admin.email), method: :put %>
+                            </span>
+                        <% end %>
+                        
+                        <a href="<%= edit_admin_path(admin.email) %>">
+                            <span class="fas fa-edit" alt="Modifier"></span>
+                        </a>
 
-                    <%= link_to "Detail", profil_path(admin.email) %>
-                    
+                        <a href="<%= delete_admin_path(admin.email) %>" data-method="DELETE">
+                            <span class="fas fa-trash" style="color: red;" alt="Supprimer"></span>
+                        </a>
+
+                        <a href="<%= profil_path(admin.email) %>">
+                            <span class="fas fa-plus" alt="Developper"></span>
+                        </a>
                 </td>
             </tr>
         <% end %>

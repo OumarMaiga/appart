@@ -25,7 +25,7 @@
                 <td><%= reservation.email %></td>
                 <td><%= reservation.telephone %></td>
                 <td><%= "#{reservation.debut} - #{reservation.fin}" %></td>
-                <td>
+                <td class="d-flex justify-content-around">
                     <% if reservation.confirmer == true %>
                         <span class="badge badge-success">
                             Confirmer
@@ -35,7 +35,10 @@
                             <%= link_to "Non confirmer", confirmer_path(reservation.slug) %>
                         </span>
                     <% end %>
-                    <%= link_to  "Detail", show_reservation_path(reservation.slug) %>
+
+                  <a href="<%= show_reservation_path(reservation.slug) %>">
+                    <span class="fas fa-plus" alt="Detail"></span>
+                  </a>
                 </td>
             </tr>
         <% end %>

@@ -35,6 +35,30 @@
                     
                     <%= link_to "Detail", show_location_path(location.slug) %>
                 </td>
+
+                <td class="d-flex justify-content-around">
+                  <% if location.etat == true %>
+                    <span class="badge badge-success">
+                        <%= link_to "Activer", change_state_location_path(location.slug), method: :put %>
+                    </span>
+                  <% else %>
+                    <span class="badge badge-danger">
+                        <%= link_to "Desactiver", change_state_location_path(location.slug), method: :put %>
+                    </span>
+                  <% end %>
+                  
+                  <a href="<%= edit_location_path(location.slug) %>">
+                    <span class="fas fa-edit" alt="Modifier"></span>
+                  </a>
+
+                  <a href="<%= location_path(location.slug) %>" data-method="DELETE">
+                    <span class="fas fa-trash" style="color: red;" alt="Supprimer"></span>
+                  </a>
+
+                  <a href="<%= show_location_path(location.slug) %>">
+                    <span class="fas fa-plus" alt="Detail"></span>
+                  </a>
+                </td>
             </tr>
         <% end %>
     </table>

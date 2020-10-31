@@ -64,12 +64,18 @@
             <tr>
                 <td><%= type.libelle %></td>
                 <td><%= type.etat %></td>
-                <td>
-                    <%= link_to  "Supp", delete_type_path(type.slug), method: :DELETE %>
+                <td class="d-flex justify-content-around">
+                  <a href="<%= edit_type_path(type.slug) %>">
+                      <span class="fas fa-edit" alt="Modifier"></span>
+                  </a>
 
-                    <%= link_to  "Modif", edit_type_path(type.slug) %>
-                  
-                    <%= link_to  "Detail", show_type_path(type.slug) %>
+                  <a href="<%= delete_type_path(type.slug) %>" data-method="DELETE">
+                      <span class="fas fa-trash" style="color: red;" alt="Supprimer"></span>
+                  </a>
+
+                  <a href="<%= show_type_path(type.slug) %>">
+                      <span class="fas fa-plus" alt="Detail"></span>
+                  </a>
                 </td>
             </tr>
         <% end %>

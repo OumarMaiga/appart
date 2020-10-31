@@ -52,15 +52,19 @@
         </thead>
         <% @caracteristiques.each do |caracteristique| %>
             <tr>
-                <td><%= caracteristique.libelle %></td>
-                <td><%= caracteristique.icon %></td>
-                <td>
-                    <%= link_to  "Supp", delete_caracteristique_path(caracteristique.libelle), method: :DELETE %>
-                    
-                    <%= link_to  "Modif", edit_caracteristique_path(caracteristique.libelle) %>
-                    
-                    <%= link_to  "Detail", show_caracteristique_path(caracteristique.libelle) %>
-                </td>
+              <td><%= caracteristique.libelle %></td>
+              <td><%= caracteristique.icon %></td>
+              <td class="d-flex justify-content-around">
+                <a href="<%= edit_caracteristique_path(caracteristique.libelle) %>">
+                    <span class="fas fa-edit" alt="Modifier"></span>
+                </a>
+                <a href="<%= delete_caracteristique_path(caracteristique.libelle) %>" data-method="DELETE">
+                    <span class="fas fa-trash" style="color: red;" alt="Supprimer"></span>
+                </a>
+                <a href="<%= show_caracteristique_path(caracteristique.libelle) %>">
+                    <span class="fas fa-plus" alt="Detail"></span>
+                </a>
+              </td>
             </tr>
         <% end %>
     </table>
