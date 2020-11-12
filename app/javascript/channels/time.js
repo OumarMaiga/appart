@@ -12,11 +12,23 @@ const time = function(){
             let hour = toDay.getHours();
             let minute = toDay.getMinutes();
 
-            let result = date+" "+month+" - "+hour+":"+minute;
+            let result = date+" "+month+" - "+hour+"<span id='common' style='visibility:visible'>:</span>"+minute;
 
-            document.getElementById("time").innerText = result;
+            document.getElementById("time").innerHTML = result;
+
+
 
         }, 1000);
+
+        const clignotant = function() {
+            if(document.getElementById('common').style.visibility == 'visible'){
+                document.getElementById('common').style.visibility = 'hidden';
+            } else {
+                document.getElementById('common').style.visibility = 'visible';
+            }
+        };
+
+        setInterval(clignotant, 500);
     });
 }
 
