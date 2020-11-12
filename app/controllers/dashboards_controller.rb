@@ -8,7 +8,8 @@ class DashboardsController < ApplicationController
   before_action :set_carateristique_changed, only: [:edit_caracteristique, :update_caracteristique, :show_caracteristique, :delete_caracteristique]
   before_action :set_reservation, only: [:confirmer, :show_reservation]
   before_action :set_user_changed, only: [:change_state_user, :delete_user]
-  
+
+
   def index
   end
 

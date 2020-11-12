@@ -18,24 +18,6 @@
                 <td><%= location.adresse %></td>
                 <td><%= "#{location.prix} / #{location.duree}" %></td>
                 <td><%= location.nom_bailleur %></td>
-                <td>
-                    <% if location.etat == true %>
-                        <span class="badge badge-success">
-                            <%= link_to "Activer", change_state_location_path(location.slug), method: :put %>
-                        </span>
-                    <% else %>
-                        <span class="badge badge-danger">
-                            <%= link_to "Desactiver", change_state_location_path(location.slug), method: :put %>
-                        </span>
-                    <% end %>                    
-                    
-                    <%= link_to "Modif", edit_location_path(location.slug) %>
-
-                    <%= link_to "Supp", location_path(location.slug), method: :DELETE %>
-                    
-                    <%= link_to "Detail", show_location_path(location.slug) %>
-                </td>
-
                 <td class="d-flex justify-content-around">
                   <% if location.etat == true %>
                     <span class="badge badge-success">

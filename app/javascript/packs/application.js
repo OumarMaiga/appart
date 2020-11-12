@@ -21,11 +21,13 @@ import { image } from 'channels/image';
 import { filtre } from 'channels/filtre';
 import { filter } from 'channels/filter';
 import { info } from 'channels/information';
+import { time } from 'channels/time';
 
 info();
 filter();
 filtre();
 image();
 searchToggleDateInputs();
+time();
 autocompleteSearch();
 toggleDateInputs();
