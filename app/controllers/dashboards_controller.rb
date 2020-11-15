@@ -1,7 +1,6 @@
 class DashboardsController < ApplicationController
 
   before_action :authenticate_user!
-  helper_method :Super_admin?, :Admin?
   before_action :set_admin_changed, only: [:change_state_admin, :edit_admin, :update_admin, :delete_admin]
   before_action :set_location_changed, only: [:change_state_location, :edit_location, :update_location, :show_location, :delete_location]
   before_action :set_type_changed, only: [:change_state_type, :edit_type, :update_type, :delete_type]
@@ -342,12 +341,5 @@ class DashboardsController < ApplicationController
     @reservation = Reservation.find_by_slug(params[:slug])
   end
 
-  def Super_admin?
-    current_user.categorie === "Super-administrateur"
-  end
-
-  def Admin?
-    current_user.categorie === "Administrateur"
-  end
 
 end
