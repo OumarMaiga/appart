@@ -1,15 +1,15 @@
-const time = function(){
-    $(document).on('turbolinks:load', function(){
-        console.log('Time');
+const time = function() {
+    $(document).on('turbolinks:load', function() {
 
-        setInterval(() => {
+        const getDate = function() {
+
             let toDay = new Date();
             let date = toDay.getDate();
             date <= 9 ? date = "0"+date : date = date;
 
             let monthNum = toDay.getMonth();
             
-            let monthArray = ["", "Jan", "Fev", "Mars", "Avrl", "Mai", "Juin", "Jull", "Août", "Sept", "Oct", "Nov", "Dec"];
+            let monthArray = ["Jan", "Fev", "Mars", "Avrl", "Mai", "Juin", "Jull", "Août", "Sept", "Oct", "Nov", "Déc"];
             let month = monthArray[monthNum];
 
             let hour = toDay.getHours();
@@ -22,20 +22,28 @@ const time = function(){
 
             document.getElementById("time").innerHTML = result;
 
-
-
-        }, 1000);
+        }
 
         const clignotant = function() {
-            if(document.getElementById('common').style.visibility == 'visible'){
-                document.getElementById('common').style.visibility = 'hidden';
-            } else {
-                document.getElementById('common').style.visibility = 'visible';
+            if(document.getElementById('common')){
+                if(document.getElementById('common').style.visibility == 'visible'){
+                    document.getElementById('common').style.visibility = 'hidden';
+                } else {
+                    document.getElementById('common').style.visibility = 'visible';
+                }
             }
         };
 
-        setInterval(clignotant, 500);
+        var time = document.getElementById("time");
+        if (time) {
+            console.log(time);
+            setInterval(getDate,1000);
+            setInterval(clignotant, 500);
+        } else {
+            console.log('NULL');
+        }
+            
     });
 }
 
-export { time };
+export { time }
