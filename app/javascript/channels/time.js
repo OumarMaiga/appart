@@ -1,6 +1,6 @@
 const time = function() {
     $(document).on('turbolinks:load', function() {
-
+        console.log('Time');
         const getDate = function() {
 
             let toDay = new Date();
@@ -36,12 +36,9 @@ const time = function() {
 
         var time = document.getElementById("time");
         if (time) {
-            console.log(time);
             setInterval(getDate,1000);
             setInterval(clignotant, 500);
-        } else {
-            console.log('NULL');
-        }
+        } 
             
     });
 }

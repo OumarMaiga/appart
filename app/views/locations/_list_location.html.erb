@@ -1,0 +1,67 @@
+
+          <div class="card md-3" id="appart">
+            <div class="row no-gutters">
+				      <div class="col-md-4">
+					      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+						      <% if location.images.present? %>
+							      <div class="carousel-inner">
+								      <% location.images.each do |image| %>
+										    <div class="carousel-item <%= "active" if image.id == location.images.first.id  %>">
+                          <a href="<%= location_path(location.slug) %>">
+                            <%= image_tag image.libelle_url, class: "location-item-image" %>
+                          </a>
+                        </div>
+					      			<% end %>
+							      </div>
+                  <% else %>
+                    <div class="carousel-item">
+                      <%= image_tag 'maison.png', class: "location-item-image" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            	<div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title" id="titre">
+                  <%= link_to location.titre, location_path(location.slug) %> 
+                  <span class="badge badge-warning float-md-right badge-type"><%= location.type.libelle %></span> 
+                  <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= location.adresse %></small></p>
+                  </h3>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <ul class="description">
+                        <% if location.nombre_salon != nil || location.nombre_chamber != nil || location.nombre_toillete != nil %>
+                          <li>
+                            <% if location.nombre_salon != nil %>
+                              Salon: <small><%= location.nombre_salon %>&nbsp&nbsp</small>
+                            <% end %>
+
+                            <% if location.nombre_chamber != nil %>
+                              Chambre: <small><%= location.nombre_chamber %>&nbsp&nbsp</small>
+                            <% end %>
+
+                            <% if location.nombre_toillete != nil %>
+                              Toillete: <small><%= location.nombre_toillete %>&nbsp&nbsp</small>
+                            <% end %>
+                          </li>
+                        <% end %>
+                        <% unless location.caracteristiques.empty? %>
+                          <li>
+                            <% location.caracteristiques.each do |caracteristique| %>
+                              <span><i stye="color: yellow" class="<%= caracteristique.icon %>"></i> <%= caracteristique.libelle %></span>&nbsp&nbsp
+                            <% end %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="location-item-price float-right">
+                        <%= location.prix %>F / <%= location.duree %> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

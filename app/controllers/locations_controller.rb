@@ -124,99 +124,28 @@ class LocationsController < ApplicationController
   def filter
     @nuit = params[:nuit]
     @mois = params[:mois]
-    
-    @types =  params[:location][:type_ids]
+
+    @types = params.dig(:location, :type_ids)
+
+    if !@types.nil?
+      @types =  params[:location][:type_ids]
+    else
+      @types = Type.select(:id)
+    end
     
     # Locations par durée
     if !@nuit.nil? && !@mois.nil?
-      @types.each do |type|
-        if @locations.nil?
-          @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
-        else
-          @locations += Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
-        end
-      end
+      @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: @types).includes(:images, :type)
 
     elsif !@nuit.nil? && @mois.nil?
-      @types.each do |type|
-        if @locations.nil?
-          @locations = Location.where(duree: 'nuit').where(type: type).includes(:images, :type)
-        else
-          @locations += Location.where(duree: 'nuit').where(type: type).includes(:images, :type)
-        end
-      end
+      @locations = Location.where(duree: 'nuit').where(type: @types).includes(:images, :type)
 
     elsif @nuit.nil? && !@mois.nil?
-      @types.each do |type|
-        if @locations.nil?
-          @locations = Location.where(duree: 'mois').where(type: type).includes(:images, :type)
-        else
-          @locations += Location.where(duree: 'mois').where(type: type).includes(:images, :type)
-        end
-      end
+      @locations = Location.where(duree: 'mois').where(type: @types).includes(:images, :type)
 
     else
-      @types.each do |type|
-        if @locations.nil?
-          @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
-        else
-          @locations += Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: type).includes(:images, :type)
-        end
-      end
-
+      @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: @types).includes(:images, :type)
     end
-
-=begin
-    # Locations par durée
-    if !@nuit.nil? && !@mois.nil?
-      if !@magasin.nil? && !@appartement.nil?
-        #@locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
-        @locations = Location.where("(duree = 'nuit' OR duree= 'mois') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
-      elsif !@magasin.nil?
-        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 2).includes(:images, :type)
-      elsif !@appartement.nil?
-        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).includes(:images, :type)
-      else
-        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).includes(:images, :type)
-      end
-    elsif !@nuit.nil?
-      if !@magasin.nil? && !@appartement.nil?
-        #@locations = Location.where(duree: 'nuit').where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
-        @locations = Location.where("(duree = 'nuit') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
-      elsif !@magasin.nil?
-        @locations = Location.where(duree: 'nuit').where(type: 2).includes(:images, :type)
-      elsif !@appartement.nil?
-        @locations = Location.where(duree: 'nuit').where(type: 1).includes(:images, :type)
-      else
-        @locations = Location.where(duree: 'nuit').includes(:images, :type)
-      end
-
-    elsif !@mois.nil?
-      if !@magasin.nil? && !@appartement.nil?
-        #@locations = Location.where(duree: 'mois').where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
-        @locations = Location.where("(duree = 'mois') AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
-
-      elsif !@magasin.nil?
-        puts @locations = Location.where(duree: 'mois').where(type: 2).includes(:images, :type)
-      elsif !@appartement.nil?
-        puts @locations = Location.where(duree: 'mois').where(type: 1).includes(:images, :type)
-      else
-        puts @locations = Location.where(duree: 'mois').includes(:images, :type)
-      end
-
-    else
-      if !@magasin.nil? && !@appartement.nil?
-        #@locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).or(Location.where(type_id: 2)).includes(:images, :type)
-        @locations = Location.where("(duree = 'nuit' OR duree= 'mois) AND (type_id = 1 OR type_id = 2)").includes(:images, :type)
-      elsif !@magasin.nil?
-        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 2).includes(:images, :type)
-      elsif !@appartement.nil?
-        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).where(type: 1).includes(:images, :type)
-      else
-        @locations = Location.where(duree: 'nuit').or(Location.where(duree: 'mois')).includes(:images, :type)
-      end
-    end
-=end
 
     respond_to do |format|
       format.js
