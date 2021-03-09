@@ -12,7 +12,6 @@
   <% end %>
 
   <div class="row">
-  <%- unless controller_name == 'pages' %>
     <div class="col-md-3">
       <div class="filtre-container sticky-top">
         <h3 class="text-center">Filtre la recherche</h3>
@@ -45,13 +44,8 @@
         </div>
       </div>
     </div>
-  <% end %>
 
-    <%- if controller_name == 'pages' %>
-      <div class="col-md-12 appart_container">
-    <% else %>
       <div class="col-md-9 appart_container">
-    <% end %>
       <% @locations.each do |location| %>
         <%= render 'locations/list_location', location: location %>
       <% end %>

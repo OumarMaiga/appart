@@ -53,7 +53,7 @@
         <% @caracteristiques.each do |caracteristique| %>
             <tr>
               <td><%= caracteristique.libelle %></td>
-              <td><%= caracteristique.icon %></td>
+              <td><span><i class="<%= caracteristique.icon %>"></i></span> <%= caracteristique.icon %></td>
               <td class="d-flex justify-content-around">
                 <a href="<%= edit_caracteristique_path(caracteristique.libelle) %>">
                     <span class="fas fa-edit" alt="Modifier"></span>

@@ -21,12 +21,21 @@
      font-size: 16px;
  }
 
+.busy {
+    background-color: #f0f0f0;
+}
+
 #titre{
     text-transform: uppercase;
- }
+}
 
  .badge-type {
      font-size: 14px;
+ }
+
+ .badge-busy {
+    font-size: 16px;
+    margin-top: -7px
  }
 
  .location-price {

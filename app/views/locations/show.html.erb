@@ -3,10 +3,13 @@
     <div class="col-md-3 d-none d-md-block">
       <%= render 'pages/search' %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 <%= 'busy' if @location.etat === false %>">
       <h3 class="card-title" id="titre">
         <%= @location.titre %> 
         <span class="badge badge-warning float-md-right badge-type"><%= @location.type.libelle %></span> 
+        <br/>        
+        <span class="badge badge-danger float-md-right badge-busy">Occupé</span> 
+
         <p class="card-text"><small class="text-muted"><i class='fas fa-map-marker-alt'></i>  <%= @location.adresse %></small></p>
       </h3>
         <div class="image_head">
@@ -51,7 +54,8 @@
             <div class="reserver-content">
               <span class="location-item-price"><%= @location.prix %> Fcfa / <%= @location.duree %></span><br>
               <!-- Réserver box modal -->
-              <button class="btn btn-custom modal-trigger" data-toggle="modal" data-target="#reserver" class="d-flex align-items-end justify-content-end">
+              
+              <button class="btn btn-custom modal-trigger" data-toggle="modal" data-target="#reserver" class="d-flex align-items-end justify-content-end" <%= 'disabled' if @location.etat === false %>>
                 Reserver
               </button>
               <p><b>Pour toutes informations<br> contactez-nous au (223 71 31 65 44)</b></p>
